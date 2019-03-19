@@ -1,0 +1,6 @@
+IndentWidth: 4
+AlignConsecutiveAssignments: true
+AlignTrailingComments: true
+AllowShortCaseLabelsOnASingleLine: true
+BinPackParameters: false
+PointerAlignment: Right
