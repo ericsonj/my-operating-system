@@ -1,3 +1,4 @@
+
 /**
  * File:   main.c
  * Author: Ericson Joseph
@@ -11,7 +12,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 #ifdef __cplusplus
 }

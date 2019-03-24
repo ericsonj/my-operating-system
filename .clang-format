@@ -4,3 +4,4 @@ AlignTrailingComments: true
 AllowShortCaseLabelsOnASingleLine: true
 BinPackParameters: false
 PointerAlignment: Right
+SortIncludes: false
