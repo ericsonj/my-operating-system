@@ -109,11 +109,13 @@ uint32_t get_next_context(uint32_t current_sp) {
  * Task Delay
  */
 void taskDelay(uint32_t delay) {
-    taskList[current_task].state = TASK_INTERRUPTIBLE;
+    taskList[current_task].state = TASK_WAITING;
     taskList[current_task].ticks = delay;
-    while (taskList[current_task].state == TASK_INTERRUPTIBLE) {
+    uint32_t tickStart           = tickCount;
+    while ((tickCount - tickStart) < (delay - 1)) {
         __WFI();
     }
+    taskList[current_task].state = TASK_RUNNING;
 }
 
 /**

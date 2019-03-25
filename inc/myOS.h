@@ -15,9 +15,9 @@
 
 typedef enum {
     TASK_RUNNING = 1,
-    TASK_INTERRUPTIBLE,
-    TASK_UNINTERRUPTABLE,
-    TASK_STOPPED
+    TASK_READY,
+    TASK_WAITING,
+    TASK_SUSPENDED
 } task_state;
 
 typedef struct {
