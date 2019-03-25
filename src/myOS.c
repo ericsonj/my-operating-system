@@ -137,3 +137,5 @@ void *idle(void *args) {
  * Add tick Count
  */
 void addTickCount(void) { tickCount++; }
+
+uint32_t getTickCount(void) { return tickCount; }

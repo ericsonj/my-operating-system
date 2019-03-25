@@ -42,4 +42,6 @@ void taskReturnHook(void *arg);
 
 void addTickCount(void);
 
+uint32_t getTickCount(void);
+
 #endif /* MYOS_H_ */
