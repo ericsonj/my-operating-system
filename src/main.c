@@ -12,7 +12,7 @@
 #include <stdint.h>
 #include <strings.h>
 
-#define EJ0 1
+#define EJ1 1
 
 #define STACK_SIZE_B 512
 
@@ -44,7 +44,7 @@ void *task2(void *args) {
 void *task3(void *args) {
     while (1) {
         gpioToggle(LED3);
-        taskDelay(200);
+        taskDelay(50);
     }
     return NULL;
 }
@@ -84,9 +84,9 @@ void *ledTask2(void *taskParmPtr) {
             __WFI();
         }
         launchLed = 0;
-        gpioWrite(LED2, ON);
+        gpioWrite(LEDB, ON);
         taskDelay(ledOnTimeTick);
-        gpioWrite(LED2, OFF);
+        gpioWrite(LEDB, OFF);
         //        xSemaphoreGive(controlLed);
     }
 }
@@ -98,6 +98,7 @@ int main() {
 #ifdef EJ0
     taskCreate(stack1, STACK_SIZE_B, task1, (void *)0x11223344);
     taskCreate(stack2, STACK_SIZE_B, task2, (void *)0x55667788);
+    taskCreate(stack3, STACK_SIZE_B, task3, (void *)0x55667788);
 #endif
 
 #ifdef EJ1

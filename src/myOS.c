@@ -63,7 +63,6 @@ void initStack(uint32_t stack[],
     stack[stackSizeBytes / 4 - 8] = (uint32_t)args;           // R0
     stack[stackSizeBytes / 4 - 9] = 0xFFFFFFF9;               // LR IRQ
 
-    // considerando los 8 registros pusheados
     void *stackDir = &(stack[stackSizeBytes / 4 - 17]);
     *sp            = (uint32_t)stackDir;
 }
@@ -75,32 +74,68 @@ uint32_t get_next_context(uint32_t current_sp) {
 
     uint32_t next_sp;
 
-    switch (current_task) {
-    case 0:
-        next_sp      = taskList[current_task + 1].sp;
+    /**
+     * If task is 0
+     */
+    if (current_task == 0) {
+        next_sp      = taskList[1].sp;
         current_task = 1;
-        break;
-    case 1:
-        taskList[current_task].sp = current_sp;
-        next_sp                   = taskList[current_task + 1].sp;
-        current_task              = 2;
-        break;
-    case 2:
-        taskList[current_task].sp = current_sp;
-        next_sp                   = taskList[current_task + 1].sp;
-        current_task              = 3;
-        break;
-    case 3:
-        taskList[current_task].sp = current_sp;
-        next_sp                   = taskList[1].sp;
-        current_task              = 1;
-        break;
-    default:
-        while (1) {
-            __WFI();
-        }
-        break;
+        return next_sp;
     }
+
+    /*
+     * Save stack of current task
+     */
+    taskList[current_task].sp = current_sp;
+
+    /*
+     * Get next stack pointer and task
+     */
+    uint32_t nextTask;
+    bool findNextTask = false;
+    for (uint32_t idx = 0; idx < (taskListIdx - 1); idx++) {
+        uint32_t taskIdx = ((current_task + idx) % (taskListIdx - 1)) + 1;
+        task_state state = taskList[taskIdx].state;
+        switch (state) {
+        case TASK_READY:
+            if (!findNextTask) {
+                taskList[taskIdx].state = TASK_RUNNING;
+                findNextTask            = true;
+                nextTask                = taskIdx;
+            }
+            break;
+        case TASK_RUNNING:
+            taskList[taskIdx].state = TASK_RUNNING;
+            if (!findNextTask) {
+                findNextTask = true;
+                nextTask     = taskIdx;
+            }
+            break;
+        case TASK_WAITING:
+            taskList[taskIdx].ticks -= 1;
+            if (taskList[taskIdx].ticks == 0) {
+                if (!findNextTask) {
+                    taskList[taskIdx].state = TASK_RUNNING;
+                    findNextTask            = true;
+                    nextTask                = taskIdx;
+                } else {
+                    taskList[taskIdx].state = TASK_READY;
+                }
+            }
+            break;
+        case TASK_SUSPENDED:
+            // No implemented yet
+            break;
+        default: break;
+        }
+    }
+
+    if (!findNextTask) {
+        nextTask = 1; // GO TO IDLE TASK
+    }
+
+    current_task = nextTask;
+    next_sp      = taskList[nextTask].sp;
 
     return next_sp;
 }
@@ -111,11 +146,9 @@ uint32_t get_next_context(uint32_t current_sp) {
 void taskDelay(uint32_t delay) {
     taskList[current_task].state = TASK_WAITING;
     taskList[current_task].ticks = delay;
-    uint32_t tickStart           = tickCount;
-    while ((tickCount - tickStart) < (delay - 1)) {
+    while (taskList[current_task].ticks > 0) {
         __WFI();
     }
-    taskList[current_task].state = TASK_RUNNING;
 }
 
 /**
