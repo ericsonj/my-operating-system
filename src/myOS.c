@@ -1,8 +1,8 @@
-/*
- * myOS.c
- *
- *  	Created on: Mar 23, 2019
- *      Author: ericson
+/**
+ * @file   myOS.c
+ * @author Ericson Joseph
+ * @date   March 2019
+ * @brief  Source of myOS
  */
 
 #include "board.h"
@@ -17,6 +17,8 @@ static void initStack(uint32_t stack[],
                       task_type entry_point,
                       void *args);
 
+static void scheduler(void);
+
 void *idle(void *args);
 
 task_struct taskList[MAX_TASK_LIST];
@@ -24,6 +26,17 @@ uint32_t current_task;
 uint32_t taskListIdx;
 
 uint32_t stackIdle[STACK_SIZE / 4];
+
+void SysTick_Handler(void) {
+    addTickCount();
+    scheduler();
+}
+
+void scheduler(void) {
+    __ISB();
+    __DSB();
+    SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk;
+}
 
 void MyOSInit(void) {
 
@@ -67,14 +80,11 @@ void initStack(uint32_t stack[],
     *sp            = (uint32_t)stackDir;
 }
 
-/*
- * Task Switch
- */
 uint32_t get_next_context(uint32_t current_sp) {
 
     uint32_t next_sp;
 
-    /**
+    /*
      * If task is 0
      */
     if (current_task == 0) {
@@ -140,20 +150,12 @@ uint32_t get_next_context(uint32_t current_sp) {
     return next_sp;
 }
 
-/**
- * Task Delay
- */
 void taskDelay(uint32_t delay) {
     taskList[current_task].state = TASK_WAITING;
     taskList[current_task].ticks = delay;
-    while (taskList[current_task].ticks > 0) {
-        __WFI();
-    }
+    scheduler();
 }
 
-/**
- * Task Return Hook
- */
 void taskReturnHook(void *arg) {
     while (1) {
         __WFI();
@@ -166,9 +168,6 @@ void *idle(void *args) {
     }
 }
 
-/**
- * Add tick Count
- */
 void addTickCount(void) { tickCount++; }
 
 uint32_t getTickCount(void) { return tickCount; }

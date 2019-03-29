@@ -1,29 +1,44 @@
 /**
- * File:   main.c
- * Author: Ericson Joseph
+ * @file    main.c
+ * @author  Ericson Joseph
+ * @date    March 2019
  *
- * Created on October 14, 2018, 11:14 PM
+ * @brief   Main program body
  */
+
+/* Include ----------------------------------------- */
+
+#include <stdint.h>
+#include <strings.h>
+
+/* Private Include --------------------------------- */
 
 #include "main.h"
 #include "board.h"
 #include "myOS.h"
 #include "sapi.h"
-#include <stdint.h>
-#include <strings.h>
 
-#define EJ1 1
-
-#define STACK_SIZE_B 512
+/* Private typedef --------------------------------- */
 
 typedef enum { UP, DOWN } ButtonState;
+
+/* Private define ---------------------------------- */
+
+#define EJ1
+#define EJ0
+#define STACK_SIZE_B 512
+
+/* Private variables ------------------------------- */
 
 uint32_t stack1[STACK_SIZE_B / 4];
 uint32_t stack2[STACK_SIZE_B / 4];
 uint32_t stack3[STACK_SIZE_B / 4];
-
+uint32_t stack4[STACK_SIZE_B / 4];
+uint32_t stack5[STACK_SIZE_B / 4];
 uint32_t ledOnTimeTick;
 uint32_t launchLed = 0;
+
+/* Private function prototypes --------------------- */
 
 void *task1(void *args) {
     while (1) {
@@ -91,6 +106,8 @@ void *ledTask2(void *taskParmPtr) {
     }
 }
 
+/* Code -------------------------------------------- */
+
 int main() {
 
     MyOSInit();
@@ -102,12 +119,13 @@ int main() {
 #endif
 
 #ifdef EJ1
-    taskCreate(stack1, STACK_SIZE_B, buttonTask, (void *)0x11223344);
-    taskCreate(stack2, STACK_SIZE_B, ledTask2, (void *)0x55667788);
+    taskCreate(stack4, STACK_SIZE_B, buttonTask, (void *)0x11223344);
+    taskCreate(stack5, STACK_SIZE_B, ledTask2, (void *)0x55667788);
 #endif
 
     Board_Init();
     SystemCoreClockUpdate();
+    NVIC_SetPriority(PendSV_IRQn, PRIORITY_PENDSV);
     SysTick_Config(SystemCoreClock / 1000);
 
     while (1) {

@@ -1,13 +1,18 @@
+/**
+ * @file   PendSV_Handler.S
+ * @author Ericson Joseph
+ * @date   March 2019
+ */
+
     .syntax unified
     .text
-    .global SysTick_Handler
+    .global PendSV_Handler
     .extern get_next_context
     .extern addTickCount
     .thumb_func
 
-SysTick_Handler:
+PendSV_Handler:
         push    {r4-r11, lr}
-        bl		addTickCount
         mrs     r0, msp
         bl      get_next_context
         msr     msp, r0

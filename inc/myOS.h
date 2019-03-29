@@ -1,8 +1,8 @@
-/*
- * myOs.h
- *
- *  	Created on: Mar 23, 2019
- *      Author: ericson
+/**
+ * @file   myOS.h
+ * @author Ericson Joseph
+ * @date   March 2019
+ * @brief  Header of myOS Operating System
  */
 
 #ifndef MYOS_H_
@@ -12,6 +12,7 @@
 
 #define MAX_TASK_LIST 10
 #define STACK_SIZE 512
+#define PRIORITY_PENDSV ((1 << __NVIC_PRIO_BITS) - 1)
 
 typedef enum {
     TASK_RUNNING = 1,
@@ -21,10 +22,10 @@ typedef enum {
 } task_state;
 
 typedef struct {
-    uint32_t id;      // Task ID
-    task_state state; // Task state
-    uint32_t sp;      // Task stack pointer
-    uint32_t ticks;   // TASK_INTERRUPTABLE ticks
+    uint32_t id;
+    task_state state;
+    uint32_t sp;
+    uint32_t ticks;
 } task_struct;
 
 typedef void *(*task_type)(void *);
