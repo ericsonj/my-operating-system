@@ -21,8 +21,7 @@ void MyOSInit(void);
 
 void taskDelay(uint32_t delay);
 
-void taskCreate(uint32_t stack[],
-                uint32_t stackSizeBytes,
+void taskCreate(uint32_t stackSizeBytes,
                 task_type entry_point,
                 int8_t priority,
                 void *args);

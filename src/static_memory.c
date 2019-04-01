@@ -76,6 +76,7 @@ void MEM_free(void *prt) {
 void MEM_initStaticMem(BYTE mem[], uint32_t memSize, uint32_t blockSize) {
     uint32_t idx = 0;
     struct mem_block_s block;
+    block.padding  = 0xAAAA;
     block.dst_size = 0;
     block.dst_size = blockSize & MASK_MEM_SIZE;
     block.dst_size |= MASK_MEM_FREE;

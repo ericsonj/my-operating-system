@@ -46,6 +46,7 @@ extern "C" {
 typedef uint8_t BYTE;
 
 struct mem_block_s {
+    uint16_t padding;
     uint16_t dst_size;
 };
 

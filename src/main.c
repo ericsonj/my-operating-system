@@ -24,17 +24,12 @@ typedef enum { UP, DOWN } ButtonState;
 
 /* Private define ---------------------------------- */
 
-#define EJ1
 #define EJ0
+#define EJ1
 #define STACK_SIZE_B 512
 
 /* Private variables ------------------------------- */
 
-uint32_t stack1[STACK_SIZE_B / 4];
-uint32_t stack2[STACK_SIZE_B / 4];
-uint32_t stack3[STACK_SIZE_B / 4];
-uint32_t stack4[STACK_SIZE_B / 4];
-uint32_t stack5[STACK_SIZE_B / 4];
 uint32_t ledOnTimeTick;
 uint32_t launchLed = 0;
 
@@ -113,14 +108,14 @@ int main() {
     MyOSInit();
 
 #ifdef EJ0
-    taskCreate(stack1, STACK_SIZE_B, task1, 1, (void *)0x11223344);
-    taskCreate(stack2, STACK_SIZE_B, task2, 1, (void *)0x55667788);
-    taskCreate(stack3, STACK_SIZE_B, task3, 1, (void *)0x55667788);
+    taskCreate(STACK_SIZE_B, task1, 1, (void *)0x11223344);
+    taskCreate(STACK_SIZE_B, task2, 1, (void *)0x55667788);
+    taskCreate(STACK_SIZE_B, task3, 1, (void *)0x55667788);
 #endif
 
 #ifdef EJ1
-    taskCreate(stack4, STACK_SIZE_B, buttonTask, 2, (void *)0x11223344);
-    taskCreate(stack5, STACK_SIZE_B, ledTask2, 2, (void *)0x55667788);
+    taskCreate(STACK_SIZE_B, buttonTask, 2, (void *)0x11223344);
+    taskCreate(STACK_SIZE_B, ledTask2, 2, (void *)0x55667788);
 #endif
 
     Board_Init();

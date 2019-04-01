@@ -51,12 +51,12 @@ void MyOSInit(void) {
     }
     taskListIdx  = 1;
     current_task = 0;
-    taskCreate(stackIdle, STACK_SIZE, idle, 0, (void *)0);
+
+    taskCreate(STACK_SIZE, idle, 0, (void *)0);
     TASKQ_Init(&taskQueue, 10);
 }
 
-void taskCreate(uint32_t stack[],
-                uint32_t stackSizeBytes,
+void taskCreate(uint32_t stackSizeBytes,
                 task_type entry_point,
                 int8_t priority,
                 void *args) {
@@ -64,6 +64,8 @@ void taskCreate(uint32_t stack[],
     taskList[taskListIdx].id       = taskListIdx;
     taskList[taskListIdx].state    = TASK_READY;
     taskList[taskListIdx].priority = priority;
+
+    uint32_t *stack = (uint32_t *)MEM_malloc(stackSizeBytes);
     initStack(stack, stackSizeBytes, &taskList[taskListIdx].sp, entry_point,
               args);
 
