@@ -51,7 +51,7 @@ void *task1(void *args) {
 void *task2(void *args) {
     while (1) {
         gpioToggle(LED2);
-        taskDelay(100);
+        taskDelay(500);
     }
     return NULL;
 }
@@ -59,7 +59,7 @@ void *task2(void *args) {
 void *task3(void *args) {
     while (1) {
         gpioToggle(LED3);
-        taskDelay(50);
+        taskDelay(100);
     }
     return NULL;
 }
@@ -96,7 +96,7 @@ void *buttonTask(void *taskParm) {
 void *ledTask2(void *taskParmPtr) {
     while (TRUE) {
         while (launchLed == 0) { // take
-            __WFI();
+            taskDelay(100);
         }
         launchLed = 0;
         gpioWrite(LEDB, ON);
@@ -113,14 +113,14 @@ int main() {
     MyOSInit();
 
 #ifdef EJ0
-    taskCreate(stack1, STACK_SIZE_B, task1, (void *)0x11223344);
-    taskCreate(stack2, STACK_SIZE_B, task2, (void *)0x55667788);
-    taskCreate(stack3, STACK_SIZE_B, task3, (void *)0x55667788);
+    taskCreate(stack1, STACK_SIZE_B, task1, 1, (void *)0x11223344);
+    taskCreate(stack2, STACK_SIZE_B, task2, 1, (void *)0x55667788);
+    taskCreate(stack3, STACK_SIZE_B, task3, 1, (void *)0x55667788);
 #endif
 
 #ifdef EJ1
-    taskCreate(stack4, STACK_SIZE_B, buttonTask, (void *)0x11223344);
-    taskCreate(stack5, STACK_SIZE_B, ledTask2, (void *)0x55667788);
+    taskCreate(stack4, STACK_SIZE_B, buttonTask, 2, (void *)0x11223344);
+    taskCreate(stack5, STACK_SIZE_B, ledTask2, 2, (void *)0x55667788);
 #endif
 
     Board_Init();
