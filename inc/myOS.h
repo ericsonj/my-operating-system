@@ -15,21 +15,20 @@
 #define STACK_SIZE 512
 #define PRIORITY_PENDSV ((1 << __NVIC_PRIO_BITS) - 1)
 
-typedef void *(*task_type)(void *);
-
 void MyOSInit(void);
 
-void taskDelay(uint32_t delay);
-
-void taskCreate(uint32_t stackSizeBytes,
-                task_type entry_point,
-                int8_t priority,
-                void *args);
+void initStack(uint32_t stack[],
+               uint32_t stackSizeBytes,
+               uint32_t *sp,
+               task_type entry_point,
+               void *args);
 
 void taskReturnHook(void *arg);
 
 void addTickCount(void);
 
 uint32_t getTickCount(void);
+
+void scheduler(void);
 
 #endif /* MYOS_H_ */

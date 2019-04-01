@@ -8,6 +8,7 @@
 
 /* Include ----------------------------------------- */
 
+#include <stdlib.h>
 #include <stdint.h>
 #include <strings.h>
 
@@ -17,6 +18,8 @@
 #include "board.h"
 #include "myOS.h"
 #include "sapi.h"
+#include "semphr.h"
+#include "double_buffer.h"
 
 /* Private typedef --------------------------------- */
 
@@ -26,15 +29,22 @@ typedef enum { UP, DOWN } ButtonState;
 
 #define EJ0
 #define EJ1
+//#define EJ2
+
 #define STACK_SIZE_B 512
+#define DOUBLE_BUFFER_SIZE 240
 
 /* Private variables ------------------------------- */
 
 uint32_t ledOnTimeTick;
-uint32_t launchLed = 0;
+semaphore_t xSemEj1;
+
+semaphore_t xSemEj2;
+int16_t Buffer_Rest[240];
 
 /* Private function prototypes --------------------- */
 
+#ifdef EJ0
 void *task1(void *args) {
     while (1) {
         gpioToggle(LED1);
@@ -58,7 +68,9 @@ void *task3(void *args) {
     }
     return NULL;
 }
+#endif
 
+#ifdef EJ1
 void *buttonTask(void *taskParm) {
 
     ButtonState state = UP;
@@ -82,7 +94,7 @@ void *buttonTask(void *taskParm) {
                 state         = UP;
                 onTime        = getTickCount() - onTime;
                 ledOnTimeTick = onTime;
-                launchLed     = 1; // give
+                semaphoreGive(&xSemEj1);
             }
         }
     }
@@ -90,16 +102,47 @@ void *buttonTask(void *taskParm) {
 
 void *ledTask2(void *taskParmPtr) {
     while (TRUE) {
-        while (launchLed == 0) { // take
-            taskDelay(100);
-        }
-        launchLed = 0;
+        semaphoreTakeBlocking(&xSemEj1);
         gpioWrite(LEDB, ON);
         taskDelay(ledOnTimeTick);
         gpioWrite(LEDB, OFF);
-        //        xSemaphoreGive(controlLed);
     }
 }
+
+#endif
+
+#ifdef EJ2
+void uDelay(uint32_t microsec) {
+    uint32_t start = DWT->CYCCNT / 204;
+    uint32_t end   = DWT->CYCCNT / 204;
+    while ((end - start) < microsec) {
+        end = DWT->CYCCNT / 204;
+    }
+}
+
+void *fillBuffer(void *taskParamPtr) {
+    DWT->CTRL |= 0x00000001; // enable the counter
+    DBUFF_initBuffer(DOUBLE_BUFFER_SIZE * (sizeof(int16_t)));
+    while (1) {
+        for (uint32_t i = 0; i < DOUBLE_BUFFER_SIZE; ++i) {
+            int16_t val = rand() & 0xFFFF;
+            DBUFF_setValue(i, val);
+            uDelay(25);
+        }
+        DBUFF_flush();
+        semaphoreGive(&xSemEj2);
+    }
+}
+
+void *multBuffer(void *taskParamPtr) {
+    while (1) {
+        semaphoreTakeBlocking(&xSemEj2);
+        for (uint32_t i = 0; i < DOUBLE_BUFFER_SIZE; ++i) {
+            Buffer_Rest[i] = DBUFF_getValue(i) * 2;
+        }
+    }
+}
+#endif
 
 /* Code -------------------------------------------- */
 
@@ -108,14 +151,21 @@ int main() {
     MyOSInit();
 
 #ifdef EJ0
-    taskCreate(STACK_SIZE_B, task1, 1, (void *)0x11223344);
-    taskCreate(STACK_SIZE_B, task2, 1, (void *)0x55667788);
-    taskCreate(STACK_SIZE_B, task3, 1, (void *)0x55667788);
+    taskCreate(STACK_SIZE_B, task1, 2, (void *)0x11223344);
+    taskCreate(STACK_SIZE_B, task2, 2, (void *)0x55667788);
+    taskCreate(STACK_SIZE_B, task3, 2, (void *)0x55667788);
 #endif
 
 #ifdef EJ1
+    semaphoreCreate(&xSemEj1);
     taskCreate(STACK_SIZE_B, buttonTask, 2, (void *)0x11223344);
     taskCreate(STACK_SIZE_B, ledTask2, 2, (void *)0x55667788);
+#endif
+
+#ifdef EJ2
+    semaphoreCreate(&xSemEj2);
+    taskCreate(STACK_SIZE_B, fillBuffer, 1, (void *)0);
+    taskCreate(STACK_SIZE_B, multBuffer, 1, (void *)0);
 #endif
 
     Board_Init();
