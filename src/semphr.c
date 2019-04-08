@@ -5,6 +5,7 @@
  */
 #include <stdlib.h>
 #include "semphr.h"
+#include "syscalls.h"
 #include "myOS.h"
 
 extern task_struct taskList[MAX_TASK_LIST];
@@ -21,9 +22,10 @@ void semaphoreGive(semaphore_t *semphr) { semphr->isTake = false; }
 
 void semaphoreTakeBlocking(semaphore_t *semphr) {
     if (semphr != NULL && semphr->isTake) {
-        taskList[current_task].semphr     = semphr;
         taskList[current_task].state      = TASK_WAITING;
-        taskList[current_task].wait_state = WAIT_SEMPHR;
+        taskList[current_task].wait_state = WAIT_SYSCALL;
+        taskList[current_task].semphr     = semphr;
+        taskList[current_task].syscall    = syscall_semphr;
         scheduler();
     }
     semphr->isTake = true;

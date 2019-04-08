@@ -20,6 +20,7 @@
 #include "sapi.h"
 #include "semphr.h"
 #include "double_buffer.h"
+#include "queue.h"
 
 /* Private typedef --------------------------------- */
 
@@ -27,9 +28,10 @@ typedef enum { UP, DOWN } ButtonState;
 
 /* Private define ---------------------------------- */
 
-#define EJ0
-#define EJ1
+//#define EJ0
+//#define EJ1
 //#define EJ2
+#define EJ3
 
 #define STACK_SIZE_B 512
 #define DOUBLE_BUFFER_SIZE 240
@@ -41,6 +43,8 @@ semaphore_t xSemEj1;
 
 semaphore_t xSemEj2;
 int16_t Buffer_Rest[240];
+
+queueHandler queue;
 
 /* Private function prototypes --------------------- */
 
@@ -144,6 +148,49 @@ void *multBuffer(void *taskParamPtr) {
 }
 #endif
 
+#ifdef EJ3
+
+void *qButtonTask(void *taskParamPtr) {
+
+    ButtonState state = UP;
+    uint32_t onTime;
+
+    while (TRUE) {
+
+        taskDelay(10);
+
+        if (!gpioRead(TEC1) && state == UP) {
+            taskDelay(20);
+            if (!gpioRead(TEC1)) {
+                state  = DOWN;
+                onTime = getTickCount();
+            }
+        }
+
+        if (gpioRead(TEC1) && state == DOWN) {
+            taskDelay(20);
+            if (gpioRead(TEC1)) {
+                state  = UP;
+                onTime = getTickCount() - onTime;
+                queueSend(queue, &onTime);
+            }
+        }
+    }
+}
+
+void *qLedTask(void *taskParamPtr) {
+    while (TRUE) {
+        uint32_t onTime;
+        queueReceiveBloking(queue, &onTime);
+        gpioWrite(LEDB, ON);
+        taskDelay(onTime);
+        gpioWrite(LEDB, OFF);
+        taskDelay(1000); // PARA MOSTRAR SI SE ENCOLAN VIAS PULSACIONES
+    }
+}
+
+#endif
+
 /* Code -------------------------------------------- */
 
 int main() {
@@ -166,6 +213,14 @@ int main() {
     semaphoreCreate(&xSemEj2);
     taskCreate(STACK_SIZE_B, fillBuffer, 1, (void *)0);
     taskCreate(STACK_SIZE_B, multBuffer, 1, (void *)0);
+#endif
+
+#ifdef EJ3
+
+    queue = queueCreate(10, sizeof(uint32_t));
+    taskCreate(STACK_SIZE_B, qButtonTask, 1, (void *)0);
+    taskCreate(STACK_SIZE_B, qLedTask, 2, (void *)0);
+
 #endif
 
     Board_Init();

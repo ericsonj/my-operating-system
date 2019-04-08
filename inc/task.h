@@ -9,10 +9,11 @@
 
 #include <stdint.h>
 #include "semphr.h"
+#include "queue.h"
 
 typedef void *(*task_type)(void *);
 
-typedef enum { WAIT_TICKS = 1, WAIT_SEMPHR } task_wait_state;
+typedef enum { WAIT_TICKS = 1, WAIT_SEMPHR, WAIT_SYSCALL } task_wait_state;
 
 typedef enum {
     TASK_RUNNING = 1,
@@ -28,7 +29,9 @@ typedef struct {
     int8_t priority;
     uint32_t ticks;
     semaphore_t *semphr;
+    queueHandler queue;
     task_wait_state wait_state;
+    uint8_t (*syscall)(void *);
 } task_struct;
 
 void taskCreate(uint32_t stackSizeBytes,

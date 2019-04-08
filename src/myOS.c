@@ -103,16 +103,25 @@ uint32_t get_next_context(uint32_t current_sp) {
         case TASK_RUNNING: break;
         case TASK_WAITING:
             switch (taskList[idx].wait_state) {
-            case WAIT_TICKS:
+            case WAIT_TICKS: {
                 taskList[idx].ticks -= 1;
                 if (taskList[idx].ticks == 0) {
                     taskList[idx].state = TASK_READY;
                     TASKQ_addByPriority(&taskQueue, &taskList[idx]);
                 }
                 break;
+            }
             case WAIT_SEMPHR: {
                 semaphore_t *sem = taskList[idx].semphr;
                 if (sem != NULL && sem->isTake == false) {
+                    taskList[idx].state = TASK_READY;
+                    TASKQ_addByPriority(&taskQueue, &taskList[idx]);
+                }
+                break;
+            }
+            case WAIT_SYSCALL: {
+                uint8_t res = (*(taskList[idx].syscall))(&taskList[idx]);
+                if (res == 1) {
                     taskList[idx].state = TASK_READY;
                     TASKQ_addByPriority(&taskQueue, &taskList[idx]);
                 }
