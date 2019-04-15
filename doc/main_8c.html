@@ -76,26 +76,31 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Application main file.  
+<p>Main program body.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;main.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;strings.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
 <code>#include &quot;board.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="myOS_8h_source.html">myOS.h</a>&quot;</code><br />
 <code>#include &quot;sapi.h&quot;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &lt;strings.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="semphr_8h_source.html">semphr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="double__buffer_8h_source.html">double_buffer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="queue_8h_source.html">queue.h</a>&quot;</code><br />
+<code>#include &quot;sapi_uart.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ac748eb861d8b57a94995937f9f65ffba"><td class="memItemLeft" align="right" valign="top"><a id="ac748eb861d8b57a94995937f9f65ffba"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EJ1</b></td></tr>
-<tr class="separator:ac748eb861d8b57a94995937f9f65ffba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa02cd4f00b7c2f6ee665954e81df5f27"><td class="memItemLeft" align="right" valign="top"><a id="aa02cd4f00b7c2f6ee665954e81df5f27"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EJ0</b></td></tr>
-<tr class="separator:aa02cd4f00b7c2f6ee665954e81df5f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88257fc053a5eefb4043395b20501c45"><td class="memItemLeft" align="right" valign="top"><a id="a88257fc053a5eefb4043395b20501c45"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>EJ5</b></td></tr>
+<tr class="separator:a88257fc053a5eefb4043395b20501c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a657668cc67f61db877c48826666886a9"><td class="memItemLeft" align="right" valign="top"><a id="a657668cc67f61db877c48826666886a9"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>STACK_SIZE_B</b>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:a657668cc67f61db877c48826666886a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae4c72f7772af6ac8396ca7ca1259af0"><td class="memItemLeft" align="right" valign="top"><a id="aae4c72f7772af6ac8396ca7ca1259af0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DOUBLE_BUFFER_SIZE</b>&#160;&#160;&#160;240</td></tr>
+<tr class="separator:aae4c72f7772af6ac8396ca7ca1259af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -106,54 +111,38 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af78d18622a7c04097551b83be8a47c4a"><td class="memItemLeft" align="right" valign="top"><a id="af78d18622a7c04097551b83be8a47c4a"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>task1</b> (void *args)</td></tr>
-<tr class="separator:af78d18622a7c04097551b83be8a47c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a4db6a7b0028c238d0ee73a5ec39aa9"><td class="memItemLeft" align="right" valign="top"><a id="a9a4db6a7b0028c238d0ee73a5ec39aa9"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>task2</b> (void *args)</td></tr>
-<tr class="separator:a9a4db6a7b0028c238d0ee73a5ec39aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4787c99e160d10bbc4ded6d779ed9c64"><td class="memItemLeft" align="right" valign="top"><a id="a4787c99e160d10bbc4ded6d779ed9c64"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>task3</b> (void *args)</td></tr>
-<tr class="separator:a4787c99e160d10bbc4ded6d779ed9c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac45b46097bb9201006aa4f4fc86fcfdd"><td class="memItemLeft" align="right" valign="top"><a id="ac45b46097bb9201006aa4f4fc86fcfdd"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>buttonTask</b> (void *taskParm)</td></tr>
-<tr class="separator:ac45b46097bb9201006aa4f4fc86fcfdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a675ee8ea1588d5914c7c83fb8d37e7bd"><td class="memItemLeft" align="right" valign="top"><a id="a675ee8ea1588d5914c7c83fb8d37e7bd"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>ledTask2</b> (void *taskParmPtr)</td></tr>
-<tr class="separator:a675ee8ea1588d5914c7c83fb8d37e7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66e125f777fa94fcb4e2b7247ee92d77"><td class="memItemLeft" align="right" valign="top"><a id="a66e125f777fa94fcb4e2b7247ee92d77"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>uartTxTask</b> (void *taskParamPtr)</td></tr>
+<tr class="separator:a66e125f777fa94fcb4e2b7247ee92d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98a7c39795474bbdf21fd6145ba4bcc0"><td class="memItemLeft" align="right" valign="top"><a id="a98a7c39795474bbdf21fd6145ba4bcc0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>usbRXCallback</b> (void *nSnR)</td></tr>
+<tr class="separator:a98a7c39795474bbdf21fd6145ba4bcc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top"><a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ad4ab52425817ee289f8e1fdf4b5fef83"><td class="memItemLeft" align="right" valign="top"><a id="ad4ab52425817ee289f8e1fdf4b5fef83"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stack1</b> [STACK_SIZE_B/4]</td></tr>
-<tr class="separator:ad4ab52425817ee289f8e1fdf4b5fef83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18ffe90b2f9c496ad8e196a881178395"><td class="memItemLeft" align="right" valign="top"><a id="a18ffe90b2f9c496ad8e196a881178395"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stack2</b> [STACK_SIZE_B/4]</td></tr>
-<tr class="separator:a18ffe90b2f9c496ad8e196a881178395"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3228ddcd256019a1476618ab3a76dcf4"><td class="memItemLeft" align="right" valign="top"><a id="a3228ddcd256019a1476618ab3a76dcf4"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stack3</b> [STACK_SIZE_B/4]</td></tr>
-<tr class="separator:a3228ddcd256019a1476618ab3a76dcf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5c96252c9d539524036191dee432ef1"><td class="memItemLeft" align="right" valign="top"><a id="ae5c96252c9d539524036191dee432ef1"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stack4</b> [STACK_SIZE_B/4]</td></tr>
-<tr class="separator:ae5c96252c9d539524036191dee432ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a020e422a0e1a856b57b77a58227d6d"><td class="memItemLeft" align="right" valign="top"><a id="a4a020e422a0e1a856b57b77a58227d6d"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stack5</b> [STACK_SIZE_B/4]</td></tr>
-<tr class="separator:a4a020e422a0e1a856b57b77a58227d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aaec7560031a30d965dcae330b3bd3f"><td class="memItemLeft" align="right" valign="top"><a id="a6aaec7560031a30d965dcae330b3bd3f"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ledOnTimeTick</b></td></tr>
 <tr class="separator:a6aaec7560031a30d965dcae330b3bd3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa49cdefa9276849323349e1945d7541"><td class="memItemLeft" align="right" valign="top"><a id="afa49cdefa9276849323349e1945d7541"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>launchLed</b> = 0</td></tr>
-<tr class="separator:afa49cdefa9276849323349e1945d7541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26dee3563395f60cf9c8cee1ab7b7be4"><td class="memItemLeft" align="right" valign="top"><a id="a26dee3563395f60cf9c8cee1ab7b7be4"></a>
+<a class="el" href="structsemaphore__t.html">semaphore_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>xSemEj1</b></td></tr>
+<tr class="separator:a26dee3563395f60cf9c8cee1ab7b7be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad146aebaf14ae67865ec5423be3089c3"><td class="memItemLeft" align="right" valign="top"><a id="ad146aebaf14ae67865ec5423be3089c3"></a>
+<a class="el" href="structsemaphore__t.html">semaphore_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>xSemEj2</b></td></tr>
+<tr class="separator:ad146aebaf14ae67865ec5423be3089c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4b64b2eed6ce4708efa834d930e94ee"><td class="memItemLeft" align="right" valign="top"><a id="aa4b64b2eed6ce4708efa834d930e94ee"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>Buffer_Rest</b> [240]</td></tr>
+<tr class="separator:aa4b64b2eed6ce4708efa834d930e94ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c0ebb15cb381d75d33b4d874fcc75bc"><td class="memItemLeft" align="right" valign="top"><a id="a5c0ebb15cb381d75d33b4d874fcc75bc"></a>
+<a class="el" href="structqueueHandler.html">queueHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><b>queue</b></td></tr>
+<tr class="separator:a5c0ebb15cb381d75d33b4d874fcc75bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Application main file. </p>
+<div class="textblock"><p>Main program body. </p>
 <dl class="section author"><dt>Author</dt><dd>Ericson Joseph </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>March 2019 </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.0.1 </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

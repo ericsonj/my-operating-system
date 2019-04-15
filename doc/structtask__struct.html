@@ -69,24 +69,170 @@ $(function() {
 <div class="title">task_struct Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="task_8h_source.html">task.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a63056579705930c00dd512555bbc4a68"><td class="memItemLeft" align="right" valign="top"><a id="a63056579705930c00dd512555bbc4a68"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memitem:a63056579705930c00dd512555bbc4a68"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#a63056579705930c00dd512555bbc4a68">id</a></td></tr>
 <tr class="separator:a63056579705930c00dd512555bbc4a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd10d760b5deab2048603b9535422f8c"><td class="memItemLeft" align="right" valign="top"><a id="abd10d760b5deab2048603b9535422f8c"></a>
-<a class="el" href="myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2">task_state</a>&#160;</td><td class="memItemRight" valign="bottom"><b>state</b></td></tr>
+<tr class="memitem:abd10d760b5deab2048603b9535422f8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="task_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2">task_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#abd10d760b5deab2048603b9535422f8c">state</a></td></tr>
 <tr class="separator:abd10d760b5deab2048603b9535422f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9967c20ae0f35b3b17078ffd0cbe9877"><td class="memItemLeft" align="right" valign="top"><a id="a9967c20ae0f35b3b17078ffd0cbe9877"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>sp</b></td></tr>
+<tr class="memitem:a9967c20ae0f35b3b17078ffd0cbe9877"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#a9967c20ae0f35b3b17078ffd0cbe9877">sp</a></td></tr>
 <tr class="separator:a9967c20ae0f35b3b17078ffd0cbe9877"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ea7427b4e61b6da256499715345bbe5"><td class="memItemLeft" align="right" valign="top"><a id="a9ea7427b4e61b6da256499715345bbe5"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ticks</b></td></tr>
+<tr class="memitem:a6b45cc6d1bc9102e06fe2e134fc7a126"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#a6b45cc6d1bc9102e06fe2e134fc7a126">priority</a></td></tr>
+<tr class="separator:a6b45cc6d1bc9102e06fe2e134fc7a126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ea7427b4e61b6da256499715345bbe5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#a9ea7427b4e61b6da256499715345bbe5">ticks</a></td></tr>
 <tr class="separator:a9ea7427b4e61b6da256499715345bbe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a159c6eb96c0193b7b9f5dda97fbcfacd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsemaphore__t.html">semaphore_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#a159c6eb96c0193b7b9f5dda97fbcfacd">semphr</a></td></tr>
+<tr class="separator:a159c6eb96c0193b7b9f5dda97fbcfacd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ca55fcbf3fa871e3aaa27e3666686e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqueueHandler.html">queueHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#ae8ca55fcbf3fa871e3aaa27e3666686e">queue</a></td></tr>
+<tr class="separator:ae8ca55fcbf3fa871e3aaa27e3666686e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b8b83ded1b2986d6a715405fdc3bdd"><td class="memItemLeft" align="right" valign="top">task_wait_state&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#a88b8b83ded1b2986d6a715405fdc3bdd">wait_state</a></td></tr>
+<tr class="separator:a88b8b83ded1b2986d6a715405fdc3bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4213c80bbe2f975ad938c7654f505fc1"><td class="memItemLeft" align="right" valign="top">uint8_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html#a4213c80bbe2f975ad938c7654f505fc1">syscall</a> )(void *)</td></tr>
+<tr class="separator:a4213c80bbe2f975ad938c7654f505fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Task struct </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a63056579705930c00dd512555bbc4a68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63056579705930c00dd512555bbc4a68">&#9670;&nbsp;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t task_struct::id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ID of task </p>
+
+</div>
+</div>
+<a id="a6b45cc6d1bc9102e06fe2e134fc7a126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b45cc6d1bc9102e06fe2e134fc7a126">&#9670;&nbsp;</a></span>priority</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t task_struct::priority</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Priority of task, minimum value: -128 and maximum value: 127 </p>
+
+</div>
+</div>
+<a id="ae8ca55fcbf3fa871e3aaa27e3666686e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ca55fcbf3fa871e3aaa27e3666686e">&#9670;&nbsp;</a></span>queue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structqueueHandler.html">queueHandler</a> task_struct::queue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Handler queue of task </p>
+
+</div>
+</div>
+<a id="a159c6eb96c0193b7b9f5dda97fbcfacd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a159c6eb96c0193b7b9f5dda97fbcfacd">&#9670;&nbsp;</a></span>semphr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsemaphore__t.html">semaphore_t</a>* task_struct::semphr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Semaphore pointer of task </p>
+
+</div>
+</div>
+<a id="a9967c20ae0f35b3b17078ffd0cbe9877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9967c20ae0f35b3b17078ffd0cbe9877">&#9670;&nbsp;</a></span>sp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t task_struct::sp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Stack pointer of task </p>
+
+</div>
+</div>
+<a id="abd10d760b5deab2048603b9535422f8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd10d760b5deab2048603b9535422f8c">&#9670;&nbsp;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="task_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2">task_state</a> task_struct::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Task state </p>
+
+</div>
+</div>
+<a id="a4213c80bbe2f975ad938c7654f505fc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4213c80bbe2f975ad938c7654f505fc1">&#9670;&nbsp;</a></span>syscall</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t(* task_struct::syscall) (void *)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Syscall function callback </p>
+
+</div>
+</div>
+<a id="a9ea7427b4e61b6da256499715345bbe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ea7427b4e61b6da256499715345bbe5">&#9670;&nbsp;</a></span>ticks</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t task_struct::ticks</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ticks of task in TASk_WAITING </p>
+
+</div>
+</div>
+<a id="a88b8b83ded1b2986d6a715405fdc3bdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b8b83ded1b2986d6a715405fdc3bdd">&#9670;&nbsp;</a></span>wait_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">task_wait_state task_struct::wait_state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Wait state when task_state iqual TASK_WAITING </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>inc/<a class="el" href="myOS_8h_source.html">myOS.h</a></li>
+<li>inc/<a class="el" href="task_8h_source.html">task.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

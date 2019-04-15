@@ -76,9 +76,12 @@ $(function() {
 
 <p>Source of myOS.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;board.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;board.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="myOS_8h_source.html">myOS.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="task__queue_8h_source.html">task_queue.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="static__memory_8h_source.html">static_memory.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="semphr_8h_source.html">semphr.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -88,18 +91,18 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>idle</b> (void *arg
 <tr class="memitem:ab5e09814056d617c521549e542639b7e"><td class="memItemLeft" align="right" valign="top"><a id="ab5e09814056d617c521549e542639b7e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SysTick_Handler</b> (void)</td></tr>
 <tr class="separator:ab5e09814056d617c521549e542639b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa00b0be5d3c4781048861e2506eb63"><td class="memItemLeft" align="right" valign="top"><a id="a9fa00b0be5d3c4781048861e2506eb63"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>scheduler</b> (void)</td></tr>
+<tr class="separator:a9fa00b0be5d3c4781048861e2506eb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afce8428439866b3ee9386b2568beb87c"><td class="memItemLeft" align="right" valign="top"><a id="afce8428439866b3ee9386b2568beb87c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>MyOSInit</b> (void)</td></tr>
 <tr class="separator:afce8428439866b3ee9386b2568beb87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac169ceaed0a2241d8860842b00ed559a"><td class="memItemLeft" align="right" valign="top"><a id="ac169ceaed0a2241d8860842b00ed559a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>taskCreate</b> (uint32_t stack[], uint32_t stackSizeBytes, task_type entry_point, void *args)</td></tr>
-<tr class="separator:ac169ceaed0a2241d8860842b00ed559a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bfc9eb3602d41f30b5c7c61e77128d1"><td class="memItemLeft" align="right" valign="top"><a id="a3bfc9eb3602d41f30b5c7c61e77128d1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initStack</b> (uint32_t stack[], uint32_t stackSizeBytes, uint32_t *sp, task_type entry_point, void *args)</td></tr>
+<tr class="separator:a3bfc9eb3602d41f30b5c7c61e77128d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a629d919565e62100fb01d1f70a589fca"><td class="memItemLeft" align="right" valign="top"><a id="a629d919565e62100fb01d1f70a589fca"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_next_context</b> (uint32_t current_sp)</td></tr>
 <tr class="separator:a629d919565e62100fb01d1f70a589fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3adc8f0092929195b8886b5d19344a4c"><td class="memItemLeft" align="right" valign="top"><a id="a3adc8f0092929195b8886b5d19344a4c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>taskDelay</b> (uint32_t delay)</td></tr>
-<tr class="separator:a3adc8f0092929195b8886b5d19344a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac846c26ab65fc1d553222400b86e3228"><td class="memItemLeft" align="right" valign="top"><a id="ac846c26ab65fc1d553222400b86e3228"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>taskReturnHook</b> (void *arg)</td></tr>
 <tr class="separator:ac846c26ab65fc1d553222400b86e3228"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,7 +116,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTickCount</b> 
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ae59b6253b8c6383c5beff520cd074bb2"><td class="memItemLeft" align="right" valign="top"><a id="ae59b6253b8c6383c5beff520cd074bb2"></a>
-<a class="el" href="structtask__struct.html">task_struct</a>&#160;</td><td class="memItemRight" valign="bottom"><b>taskList</b> [<a class="el" href="myOS_8h.html#a7f8ab06c7ad7d76c9fb45256289928c0">MAX_TASK_LIST</a>]</td></tr>
+<a class="el" href="structtask__struct.html">task_struct</a>&#160;</td><td class="memItemRight" valign="bottom"><b>taskList</b> [MAX_TASK_LIST]</td></tr>
 <tr class="separator:ae59b6253b8c6383c5beff520cd074bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32b70ea934ccc1f455d9264ace57522b"><td class="memItemLeft" align="right" valign="top"><a id="a32b70ea934ccc1f455d9264ace57522b"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>current_task</b></td></tr>
@@ -121,9 +124,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>current_task</b><
 <tr class="memitem:aeb36a6c524e4482e52f32693ed6cb60a"><td class="memItemLeft" align="right" valign="top"><a id="aeb36a6c524e4482e52f32693ed6cb60a"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>taskListIdx</b></td></tr>
 <tr class="separator:aeb36a6c524e4482e52f32693ed6cb60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad3c94c8f9254af0cacb28d2300fa7ef"><td class="memItemLeft" align="right" valign="top"><a id="aad3c94c8f9254af0cacb28d2300fa7ef"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stackIdle</b> [<a class="el" href="myOS_8h.html#a6423a880df59733d2d9b509c7718d3a9">STACK_SIZE</a>/4]</td></tr>
-<tr class="separator:aad3c94c8f9254af0cacb28d2300fa7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a476b22c811a5613a4abdd35b71d72717"><td class="memItemLeft" align="right" valign="top"><a id="a476b22c811a5613a4abdd35b71d72717"></a>
+struct <a class="el" href="structlist__s.html">list_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>taskQueue</b></td></tr>
+<tr class="separator:a476b22c811a5613a4abdd35b71d72717"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Source of myOS. </p>

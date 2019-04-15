@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['task_5fstate',['task_state',['../myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2',1,'myOS.h']]]
+  ['syscall_5fresponse',['Syscall_response',['../syscalls_8h.html#a8be2c230e27bc9a80e0e53cbfaa3b0e9',1,'syscalls.h']]]
 ];

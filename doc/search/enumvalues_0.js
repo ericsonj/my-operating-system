@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['task_5fready',['TASK_READY',['../myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2aebcd951a6127c3c50a4f197b2b637793',1,'myOS.h']]],
-  ['task_5frunning',['TASK_RUNNING',['../myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2a9bd2895158d9e7c8cf80b57659fcba50',1,'myOS.h']]],
-  ['task_5fsuspended',['TASK_SUSPENDED',['../myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2a5627900a47535078453400aa045af93a',1,'myOS.h']]],
-  ['task_5fwaiting',['TASK_WAITING',['../myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2a4a29fe6fa4920be0a639581f0d796545',1,'myOS.h']]]
+  ['syscall_5fend',['SYSCALL_END',['../syscalls_8h.html#a8be2c230e27bc9a80e0e53cbfaa3b0e9a362ad26de691de0ad9d3bac6058029f1',1,'syscalls.h']]],
+  ['syscall_5ferr',['SYSCALL_ERR',['../syscalls_8h.html#a8be2c230e27bc9a80e0e53cbfaa3b0e9a19a8e8e12cb005953162656e74b19105',1,'syscalls.h']]],
+  ['syscall_5fin_5fprocessing',['SYSCALL_IN_PROCESSING',['../syscalls_8h.html#a8be2c230e27bc9a80e0e53cbfaa3b0e9a665f1551d1a76b5ac374fff73453a7f0',1,'syscalls.h']]]
 ];

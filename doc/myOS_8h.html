@@ -67,10 +67,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">myOS.h File Reference</div>  </div>
@@ -80,51 +77,30 @@ $(function() {
 <p>Header of myOS Operating System.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="task_8h_source.html">task.h</a>&quot;</code><br />
 </div>
 <p><a href="myOS_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtask__struct.html">task_struct</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a7f8ab06c7ad7d76c9fb45256289928c0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="myOS_8h.html#a7f8ab06c7ad7d76c9fb45256289928c0">MAX_TASK_LIST</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memitem:a7f8ab06c7ad7d76c9fb45256289928c0"><td class="memItemLeft" align="right" valign="top"><a id="a7f8ab06c7ad7d76c9fb45256289928c0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_TASK_LIST</b>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:a7f8ab06c7ad7d76c9fb45256289928c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6423a880df59733d2d9b509c7718d3a9"><td class="memItemLeft" align="right" valign="top"><a id="a6423a880df59733d2d9b509c7718d3a9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="myOS_8h.html#a6423a880df59733d2d9b509c7718d3a9">STACK_SIZE</a>&#160;&#160;&#160;512</td></tr>
-<tr class="memdesc:a6423a880df59733d2d9b509c7718d3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum stack size. <br /></td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STACK_SIZE</b>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:a6423a880df59733d2d9b509c7718d3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06dec774e12e79040ba94321d2297387"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="myOS_8h.html#a06dec774e12e79040ba94321d2297387">PRIORITY_PENDSV</a>&#160;&#160;&#160;((1 &lt;&lt; __NVIC_PRIO_BITS) - 1)</td></tr>
+<tr class="memitem:a06dec774e12e79040ba94321d2297387"><td class="memItemLeft" align="right" valign="top"><a id="a06dec774e12e79040ba94321d2297387"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PRIORITY_PENDSV</b>&#160;&#160;&#160;((1 &lt;&lt; __NVIC_PRIO_BITS) - 1)</td></tr>
 <tr class="separator:a06dec774e12e79040ba94321d2297387"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:abecc19b0f6112846eb46cc3ef228c1ca"><td class="memItemLeft" align="right" valign="top"><a id="abecc19b0f6112846eb46cc3ef228c1ca"></a>
-typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><b>task_type</b>) (void *)</td></tr>
-<tr class="separator:abecc19b0f6112846eb46cc3ef228c1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a46c7ab5dd73831ee98458db0a68fc4a2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2">task_state</a> { <a class="el" href="myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2a9bd2895158d9e7c8cf80b57659fcba50">TASK_RUNNING</a> = 1, 
-<a class="el" href="myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2aebcd951a6127c3c50a4f197b2b637793">TASK_READY</a>, 
-<a class="el" href="myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2a4a29fe6fa4920be0a639581f0d796545">TASK_WAITING</a>, 
-<a class="el" href="myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2a5627900a47535078453400aa045af93a">TASK_SUSPENDED</a>
- }</td></tr>
-<tr class="separator:a46c7ab5dd73831ee98458db0a68fc4a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:afce8428439866b3ee9386b2568beb87c"><td class="memItemLeft" align="right" valign="top"><a id="afce8428439866b3ee9386b2568beb87c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>MyOSInit</b> (void)</td></tr>
 <tr class="separator:afce8428439866b3ee9386b2568beb87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3adc8f0092929195b8886b5d19344a4c"><td class="memItemLeft" align="right" valign="top"><a id="a3adc8f0092929195b8886b5d19344a4c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>taskDelay</b> (uint32_t delay)</td></tr>
-<tr class="separator:a3adc8f0092929195b8886b5d19344a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac169ceaed0a2241d8860842b00ed559a"><td class="memItemLeft" align="right" valign="top"><a id="ac169ceaed0a2241d8860842b00ed559a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>taskCreate</b> (uint32_t stack[], uint32_t stackSizeBytes, task_type entry_point, void *args)</td></tr>
-<tr class="separator:ac169ceaed0a2241d8860842b00ed559a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bfc9eb3602d41f30b5c7c61e77128d1"><td class="memItemLeft" align="right" valign="top"><a id="a3bfc9eb3602d41f30b5c7c61e77128d1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initStack</b> (uint32_t stack[], uint32_t stackSizeBytes, uint32_t *sp, task_type entry_point, void *args)</td></tr>
+<tr class="separator:a3bfc9eb3602d41f30b5c7c61e77128d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac846c26ab65fc1d553222400b86e3228"><td class="memItemLeft" align="right" valign="top"><a id="ac846c26ab65fc1d553222400b86e3228"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>taskReturnHook</b> (void *arg)</td></tr>
 <tr class="separator:ac846c26ab65fc1d553222400b86e3228"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,68 +110,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>addTickCount</b> (voi
 <tr class="memitem:a9eb1a8063d0b101824073d4049c123e2"><td class="memItemLeft" align="right" valign="top"><a id="a9eb1a8063d0b101824073d4049c123e2"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTickCount</b> (void)</td></tr>
 <tr class="separator:a9eb1a8063d0b101824073d4049c123e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa00b0be5d3c4781048861e2506eb63"><td class="memItemLeft" align="right" valign="top"><a id="a9fa00b0be5d3c4781048861e2506eb63"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>scheduler</b> (void)</td></tr>
+<tr class="separator:a9fa00b0be5d3c4781048861e2506eb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header of myOS Operating System. </p>
 <dl class="section author"><dt>Author</dt><dd>Ericson Joseph </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>March 2019 </dd></dl>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a7f8ab06c7ad7d76c9fb45256289928c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f8ab06c7ad7d76c9fb45256289928c0">&#9670;&nbsp;</a></span>MAX_TASK_LIST</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAX_TASK_LIST&#160;&#160;&#160;10</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Maximum number of elements in task list </p>
-
-</div>
-</div>
-<a id="a06dec774e12e79040ba94321d2297387"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06dec774e12e79040ba94321d2297387">&#9670;&nbsp;</a></span>PRIORITY_PENDSV</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PRIORITY_PENDSV&#160;&#160;&#160;((1 &lt;&lt; __NVIC_PRIO_BITS) - 1)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get minimum priority of PendSV_IRQ </p>
-
-</div>
-</div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a46c7ab5dd73831ee98458db0a68fc4a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46c7ab5dd73831ee98458db0a68fc4a2">&#9670;&nbsp;</a></span>task_state</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="myOS_8h.html#a46c7ab5dd73831ee98458db0a68fc4a2">task_state</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a46c7ab5dd73831ee98458db0a68fc4a2a9bd2895158d9e7c8cf80b57659fcba50"></a>TASK_RUNNING&#160;</td><td class="fielddoc"><p>Task in state running. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a46c7ab5dd73831ee98458db0a68fc4a2aebcd951a6127c3c50a4f197b2b637793"></a>TASK_READY&#160;</td><td class="fielddoc"><p>Task in state ready. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a46c7ab5dd73831ee98458db0a68fc4a2a4a29fe6fa4920be0a639581f0d796545"></a>TASK_WAITING&#160;</td><td class="fielddoc"><p>Task in state waiting. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a46c7ab5dd73831ee98458db0a68fc4a2a5627900a47535078453400aa045af93a"></a>TASK_SUSPENDED&#160;</td><td class="fielddoc"><p>Task in state suspended. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

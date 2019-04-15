@@ -1,3 +1,11 @@
+/*! \mainpage myOS Documentation
+ *
+ * \section intro_sec Introduction
+ *
+ * Enthusiast Operating System (myOS) for embedded system ARM Cortex-M.
+ *
+ */
+
 /**
  * @file    main.c
  * @author  Ericson Joseph
@@ -21,6 +29,7 @@
 #include "semphr.h"
 #include "double_buffer.h"
 #include "queue.h"
+#include "sapi_uart.h"
 
 /* Private typedef --------------------------------- */
 
@@ -31,7 +40,8 @@ typedef enum { UP, DOWN } ButtonState;
 //#define EJ0
 //#define EJ1
 //#define EJ2
-#define EJ3
+//#define EJ3
+#define EJ5
 
 #define STACK_SIZE_B 512
 #define DOUBLE_BUFFER_SIZE 240
@@ -191,7 +201,26 @@ void *qLedTask(void *taskParamPtr) {
 
 #endif
 
+#ifdef EJ5
+
+void *uartTxTask(void *taskParamPtr) {
+    while (TRUE) {
+        uartWriteString(UART_USB, "Ingrese una lista de caracteres:\r\n");
+        taskDelay(10000);
+    }
+}
+
+#endif
+
 /* Code -------------------------------------------- */
+
+void usbRXCallback(void *nSnR) {
+    while (uartRxReady(UART_USB)) {
+        uint8_t byteRx;
+        byteRx = uartRxRead(UART_USB);
+        uartWriteByte(UART_USB, byteRx);
+    }
+}
 
 int main() {
 
@@ -216,16 +245,23 @@ int main() {
 #endif
 
 #ifdef EJ3
-
     queue = queueCreate(10, sizeof(uint32_t));
     taskCreate(STACK_SIZE_B, qButtonTask, 1, (void *)0);
     taskCreate(STACK_SIZE_B, qLedTask, 2, (void *)0);
+#endif
 
+#ifdef EJ5
+    taskCreate(STACK_SIZE_B, uartTxTask, 1, (void *)0);
 #endif
 
     Board_Init();
     SystemCoreClockUpdate();
     NVIC_SetPriority(PendSV_IRQn, PRIORITY_PENDSV);
+
+    uartConfig(UART_USB, 115200);
+    uartCallbackSet(UART_USB, UART_RECEIVE, usbRXCallback, NULL);
+    //    uartInterrupt(UART_USB, true);
+
     SysTick_Config(SystemCoreClock / 1000);
 
     while (1) {

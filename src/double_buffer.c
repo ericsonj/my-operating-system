@@ -7,8 +7,17 @@
 #include "static_memory.h"
 #include "string.h"
 
+/**
+ * Definition of input buffer
+ */
 int16_t *bufferA;
+/**
+ * Definition of output buffer
+ */
 int16_t *bufferB;
+/**
+ * Definition of size
+ */
 uint32_t _size;
 
 void DBUFF_initBuffer(uint32_t size) {

@@ -1,10 +1,10 @@
-/*
- * File:   static_memory.h
- * Author: Ericson Joseph <ericsonjoseph@gmail.com>
+/**
+ * @file   static_memory.h
+ * @author Ericson Joseph
+ * @date   Apr 1, 2019
  *
- * Created on March 31, 2019, 11:33 AM
+ * @brief Static Memory Allocation.
  */
-
 #ifndef STATIC_MEMORY_H
 #define STATIC_MEMORY_H
 

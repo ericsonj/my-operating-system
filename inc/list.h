@@ -1,10 +1,10 @@
-/* 
- * File:   list.h
- * Author: Ericson Joseph <ericsonjoseph@gmail.com>
+/**
+ * @file   list.h
+ * @author Ericson Joseph
+ * @date   Apr 1, 2019
  *
- * Created on March 29, 2019, 8:46 PM
+ * @brief Generic list data structure
  */
-
 #ifndef LIST_H
 #define LIST_H
 
@@ -16,47 +16,119 @@ extern "C" {
 #include <stdbool.h>
 #include <stdint.h>
 
-    struct list_node_s {
-        void* object;
-        struct list_node_s *nextNode;
-    };
+/**
+ * Node struct
+ */
+struct list_node_s {
+    void *object;
+    struct list_node_s *nextNode;
+};
 
-    struct list_s {
-        uint32_t length;
-        struct list_node_s *firstNode;
-    };
+/**
+ * List struct
+ */
+struct list_s {
+    uint32_t length;
+    struct list_node_s *firstNode;
+};
 
-    typedef struct list_s list_s;
+typedef struct list_s list_s;
 
-    void LIST_init(struct list_s* list);
-    
-    bool LIST_isEmpty(struct list_s* list);
+/**
+ * Initialize generic list.
+ * @param list
+ */
+void LIST_init(struct list_s *list);
 
-    void LIST_addFirst(struct list_s *list, struct list_node_s *node);
+/**
+ * Check if list is empty.
+ * @param list
+ * @return bool TRUE if list is empty
+ */
+bool LIST_isEmpty(struct list_s *list);
 
-    void LIST_addLast(struct list_s *list, struct list_node_s *node);
+/**
+ * Add node to list in first position.
+ * @param list
+ * @param node
+ */
+void LIST_addFirst(struct list_s *list, struct list_node_s *node);
 
-    void LIST_insert(struct list_s *list, uint32_t index, struct list_node_s *node);
+/**
+ * Add node to list in last position.
+ * @param list
+ * @param node
+ */
+void LIST_addLast(struct list_s *list, struct list_node_s *node);
 
-    struct list_node_s* LIST_removeFirst(struct list_s *list);
+/**
+ * Add node to list in index position.
+ * @param list
+ * @param index
+ * @param node
+ */
+void LIST_insert(struct list_s *list, uint32_t index, struct list_node_s *node);
 
-    struct list_node_s* LIST_removeLast(struct list_s *list);
-    
-    struct list_node_s* LIST_get(struct list_s *list, uint32_t index);
-    
-    struct list_node_s* LIST_poll(struct list_s *list);
+/**
+ * Remove and return list_node_s from the list in first position.
+ * @param list
+ * @return list_node_s
+ */
+struct list_node_s *LIST_removeFirst(struct list_s *list);
 
-    struct list_node_s* LIST_peek(struct list_s *list);
+/**
+ * Remove and return list_node_s from the list in last position.
+ * @param list
+ * @return list_node_s
+ */
+struct list_node_s *LIST_removeLast(struct list_s *list);
 
-    bool LIST_offer(struct list_s *list, struct list_node_s *node);
+/**
+ * Return list_node_s from list in index position.
+ * @param list
+ * @param index
+ * @return list_node_s
+ */
+struct list_node_s *LIST_get(struct list_s *list, uint32_t index);
 
-    uint32_t LIST_size(struct list_s *list);
-    
-    void LIST_newNode(struct list_node_s *node, void* id);
+/**
+ * Retrieves and removes the head (first element) of this list.
+ * @param list
+ * @return
+ */
+struct list_node_s *LIST_poll(struct list_s *list);
+
+/**
+ * Retrieves, but does not remove, the head (first element) of this list.
+ * @param list
+ * @return
+ */
+struct list_node_s *LIST_peek(struct list_s *list);
+
+/**
+ * Adds the specified element as the tail (last element) of this list.
+ * @param list
+ * @param node
+ * @return bool
+ */
+bool LIST_offer(struct list_s *list, struct list_node_s *node);
+
+/**
+ * Return size of list.
+ * @param list
+ * @return uint32_t
+ */
+uint32_t LIST_size(struct list_s *list);
+
+/**
+ * Initialize struct list_node_s
+ * @param node
+ * @param id
+ */
+void LIST_newNode(struct list_node_s *node, void *id);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* LIST_H */
-

@@ -43,12 +43,12 @@ uint8_t queueSend(queueHandler queue, void *item) {
     return 1;
 }
 
-uint8_t queueReceiveBloking(queueHandler queue, void *item) {
+uint8_t queueReceiveBlocking(queueHandler queue, void *item) {
 
     taskList[current_task].state      = TASK_WAITING;
     taskList[current_task].wait_state = WAIT_SYSCALL;
     taskList[current_task].queue      = queue;
-    taskList[current_task].syscall    = syscall_queueReceiveBloking;
+    taskList[current_task].syscall    = syscall_queueReceiveBlocking;
     scheduler();
 
     struct list_node_s *node = LIST_poll(queue.list);

@@ -26,7 +26,7 @@ uint8_t syscall_semphr(void *task) {
     return SYSCALL_IN_PROCESSING;
 }
 
-uint8_t syscall_queueReceiveBloking(void *task) {
+uint8_t syscall_queueReceiveBlocking(void *task) {
     task_struct *currentTask = (task_struct *)task;
     queueHandler queue       = currentTask->queue;
     if (!LIST_isEmpty(queue.list)) {

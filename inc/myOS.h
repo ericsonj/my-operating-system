@@ -2,6 +2,7 @@
  * @file   myOS.h
  * @author Ericson Joseph
  * @date   March 2019
+ *
  * @brief  Header of myOS Operating System
  */
 
