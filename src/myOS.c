@@ -2,6 +2,7 @@
  * @file   myOS.c
  * @author Ericson Joseph
  * @date   March 2019
+ *
  * @brief  Source of myOS
  */
 
@@ -20,6 +21,7 @@ task_struct taskList[MAX_TASK_LIST];
 uint32_t current_task;
 uint32_t taskListIdx;
 struct list_s taskQueue;
+os_monitor_s monitor;
 
 void SysTick_Handler(void) {
     addTickCount();
@@ -33,6 +35,13 @@ void scheduler(void) {
 }
 
 void MyOSInit(void) {
+
+    DWT->CTRL |= 0x00000001; // enable the counter
+
+    monitor.start_os    = DWT->CYCCNT;
+    monitor.idle_ticks  = 0;
+    monitor.ticks_count = 0;
+
     MEM_init();
     for (uint32_t i = 0; i < MAX_TASK_LIST; ++i) {
         taskList[i].id    = 0;
@@ -140,6 +149,7 @@ uint32_t get_next_context(uint32_t current_sp) {
     task_struct *task = TASKQ_poll(&taskQueue);
     if (task == NULL) {
         current_task = 1;
+        monitor.idle_ticks++;
     } else {
         current_task                 = task->id;
         taskList[current_task].state = TASK_RUNNING;
@@ -162,6 +172,16 @@ void *idle(void *args) {
     }
 }
 
-void addTickCount(void) { tickCount++; }
+void addTickCount(void) {
+    tickCount++;
+    monitor.ticks_count++;
+}
+
+os_monitor_s getMonitor() { return monitor; }
+
+void monitorReset() {
+    monitor.idle_ticks  = 0;
+    monitor.ticks_count = 0;
+}
 
 uint32_t getTickCount(void) { return tickCount; }

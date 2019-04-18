@@ -93,8 +93,14 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a901a9deb59428d4c6d34549a8323c8de"><td class="memItemLeft" align="right" valign="top"><a id="a901a9deb59428d4c6d34549a8323c8de"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>__USE_BLOCK_1024__</b>&#160;&#160;&#160;0</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>__USE_BLOCK_1024__</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a901a9deb59428d4c6d34549a8323c8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b3cf86696701e30bd21cf02f91311b0"><td class="memItemLeft" align="right" valign="top"><a id="a3b3cf86696701e30bd21cf02f91311b0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BLOCK_SIZE_1024</b>&#160;&#160;&#160;1024</td></tr>
+<tr class="separator:a3b3cf86696701e30bd21cf02f91311b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef2434bf53ed1806aeb2c891cf081551"><td class="memItemLeft" align="right" valign="top"><a id="aef2434bf53ed1806aeb2c891cf081551"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NUM_BLOCK_1024</b>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:aef2434bf53ed1806aeb2c891cf081551"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67bfe0419b75d5fb54ac8712cc08b89e"><td class="memItemLeft" align="right" valign="top"><a id="a67bfe0419b75d5fb54ac8712cc08b89e"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>BLOCK_SIZE_512</b>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:a67bfe0419b75d5fb54ac8712cc08b89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,6 +179,9 @@ BYTE&#160;</td><td class="memItemRight" valign="bottom"><b>mem_256</b> [NUM_BLOC
 <tr class="memitem:abe5e2fc3762c0764d5b2deb4657ccaf4"><td class="memItemLeft" align="right" valign="top"><a id="abe5e2fc3762c0764d5b2deb4657ccaf4"></a>
 BYTE&#160;</td><td class="memItemRight" valign="bottom"><b>mem_512</b> [NUM_BLOCK_512 *(BLOCK_SIZE_512+sizeof(struct <a class="el" href="structmem__block__s.html">mem_block_s</a>))]</td></tr>
 <tr class="separator:abe5e2fc3762c0764d5b2deb4657ccaf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c4b074064d556ec96483481f6eee20"><td class="memItemLeft" align="right" valign="top"><a id="ab4c4b074064d556ec96483481f6eee20"></a>
+BYTE&#160;</td><td class="memItemRight" valign="bottom"><b>mem_1024</b> [NUM_BLOCK_1024 *(BLOCK_SIZE_1024+sizeof(struct <a class="el" href="structmem__block__s.html">mem_block_s</a>))]</td></tr>
+<tr class="separator:ab4c4b074064d556ec96483481f6eee20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Static Memory Allocation. </p>

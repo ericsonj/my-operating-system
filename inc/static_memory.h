@@ -16,11 +16,11 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 
-#define __USE_BLOCK_1024__ 0
+#define __USE_BLOCK_1024__ 1
 
 #if __USE_BLOCK_1024__
 #define BLOCK_SIZE_1024 1024 // 1024 BYTES
-#define NUM_BLOCK_1024 10
+#define NUM_BLOCK_1024 3
 #endif
 
 #define BLOCK_SIZE_512 512 // 256 BYTES

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['task_5fstruct',['task_struct',['../structtask__struct.html',1,'']]]
+  ['semaphore_5ft',['semaphore_t',['../structsemaphore__t.html',1,'']]]
 ];
