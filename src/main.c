@@ -30,6 +30,7 @@
 #include "double_buffer.h"
 #include "queue.h"
 #include "sapi_uart.h"
+#include "debounce.h"
 
 /* Private typedef --------------------------------- */
 
@@ -37,26 +38,58 @@ typedef enum { UP, DOWN } ButtonState;
 
 /* Private define ---------------------------------- */
 
-#define EJ0
-#define EJ1
+//#define EJ0
+//#define EJ1
 //#define EJ2
-#define EJ3
-#define EJ5
+//#define EJ3
+//#define EJ5
+
+#define FINAL_EX
 
 #define STACK_SIZE_1024 1024
 #define STACK_SIZE_512 512
 #define DOUBLE_BUFFER_SIZE 240
 
+#define SERIAL_BUFF_SIZE 50
+#define MSG_ALL_TIME "Tiempo encendido: %ld ms\n\r"
+#define MSG_FALLING_TIME "Tiempo entre flancos descendentes: %ld ms\n\r"
+#define MSG_RISING_TIME "Tiempo entre flancos ascendentes: %ld ms\n\r"
+
 /* Private variables ------------------------------- */
 
 uint32_t ledOnTimeTick;
 semaphore_t xSemEj1;
-
 semaphore_t xSemEj2;
 int16_t Buffer_Rest[240];
 
 queueHandler queue;
+queueHandler serialQueue;
 
+debounce_t tec1Handler;
+debounce_t tec2Handler;
+
+typedef enum {
+    NOP,
+    WAIT_TEC2_DOWN,
+    WAIT_TEC2_UP,
+    WAIT_TEC1_DOWN,
+    WAIT_TEC1_UP,
+    ACTION,
+    COUNT
+} tec_count_state;
+
+typedef struct {
+    uint8_t type;
+    uint32_t fallingTime;
+    uint32_t risingTime;
+    gpioMap_t led;
+} ledEvent_s;
+
+tec_count_state state;
+
+char serialBufferOut[SERIAL_BUFF_SIZE];
+
+gpioMap_t led;
 /* Private function prototypes --------------------- */
 
 #ifdef EJ0
@@ -157,6 +190,125 @@ void *multBuffer(void *taskParamPtr) {
         }
     }
 }
+#endif
+
+#ifdef FINAL_EX
+
+void *applicationTask(void *taskParamPtr) {
+
+    uint32_t startTime = 0;
+    uint32_t endTime   = 0;
+    ledEvent_s ledEvent;
+    while (true) {
+        debounceMEF(TEC1, &tec1Handler);
+        debounceMEF(TEC2, &tec2Handler);
+        switch (state) {
+        case NOP:
+            if (tec1Handler.state == BUTTON_DOWN) {
+                state         = WAIT_TEC2_DOWN;
+                ledEvent.type = 0;
+                startTime     = getTickCount();
+            } else if (tec2Handler.state == BUTTON_DOWN) {
+                state         = WAIT_TEC1_DOWN;
+                ledEvent.type = 1;
+                startTime     = getTickCount();
+            }
+            break;
+        case WAIT_TEC2_DOWN:
+            if (tec2Handler.state == BUTTON_DOWN) {
+                state     = COUNT;
+                startTime = getTickCount() - startTime;
+            } else if (tec1Handler.state == BUTTON_UP) {
+                state     = NOP;
+                startTime = 0;
+            }
+            break;
+        case WAIT_TEC2_UP:
+            if (tec2Handler.state == BUTTON_UP) {
+                endTime = getTickCount() - endTime;
+                state   = ACTION;
+            }
+            break;
+        case WAIT_TEC1_UP:
+            if (tec1Handler.state == BUTTON_UP) {
+                endTime = getTickCount() - endTime;
+                state   = ACTION;
+            }
+            break;
+        case WAIT_TEC1_DOWN:
+            if (tec1Handler.state == BUTTON_DOWN) {
+                state     = COUNT;
+                startTime = getTickCount() - startTime;
+            } else if (tec2Handler.state == BUTTON_UP) {
+                state     = NOP;
+                startTime = 0;
+            }
+            break;
+        case COUNT:
+            if (tec1Handler.state == BUTTON_UP) {
+                endTime      = getTickCount();
+                ledEvent.led = ledEvent.type == 0 ? LEDG : LED2;
+                state        = WAIT_TEC2_UP;
+            } else if (tec2Handler.state == BUTTON_UP) {
+                endTime      = getTickCount();
+                ledEvent.led = ledEvent.type == 0 ? LEDR : LEDB;
+                state        = WAIT_TEC1_UP;
+            }
+            break;
+        case ACTION:
+            ledEvent.fallingTime = startTime;
+            ledEvent.risingTime  = endTime;
+            queueSend(queue, &ledEvent);
+            queueSend(serialQueue, &ledEvent);
+            state = NOP;
+            break;
+        default: break;
+        }
+        taskDelay(20);
+    }
+}
+
+void *ledsTask(void *taskParamPtr) {
+    while (TRUE) {
+        ledEvent_s ledEvent;
+        queueReceiveBlocking(queue, &ledEvent);
+        led = ledEvent.led;
+        gpioWrite(led, ON);
+        taskDelay(ledEvent.fallingTime + ledEvent.risingTime);
+        gpioWrite(led, OFF);
+        taskDelay(10); // PARA MOSTRAR SI SE ENCOLAN VIAS PULSACIONES
+    }
+}
+
+void *serialTask(void *taskParamPtr) {
+    while (TRUE) {
+        ledEvent_s ledEvent;
+        queueReceiveBlocking(serialQueue, &ledEvent);
+        switch (ledEvent.led) {
+        case LEDG: uartWriteString(UART_USB, "Led Verde encendido:\n\r"); break;
+        case LEDR: uartWriteString(UART_USB, "Led Rojo encendido:\n\r"); break;
+        case LEDB: uartWriteString(UART_USB, "Led Azul encendido:\n\r"); break;
+        case LED2:
+            uartWriteString(UART_USB, "Led Amarillo encendido:\n\r");
+            break;
+        default: break;
+        }
+
+        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
+        sprintf(serialBufferOut, MSG_ALL_TIME,
+                ledEvent.fallingTime + ledEvent.risingTime);
+        uartWriteString(UART_USB, serialBufferOut);
+
+        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
+        sprintf(serialBufferOut, MSG_FALLING_TIME, ledEvent.fallingTime);
+        uartWriteString(UART_USB, serialBufferOut);
+
+        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
+        sprintf(serialBufferOut, MSG_RISING_TIME, ledEvent.risingTime);
+        uartWriteString(UART_USB, serialBufferOut);
+    }
+}
+
 #endif
 
 #ifdef EJ3
@@ -263,14 +415,23 @@ int main() {
     taskCreate(STACK_SIZE_1024, uartTxTask, 1, (void *)0);
 #endif
 
+#ifdef FINAL_EX
+    queue       = queueCreate(10, sizeof(ledEvent_s));
+    serialQueue = queueCreate(10, sizeof(ledEvent_s));
+    taskCreate(STACK_SIZE_512, applicationTask, 2, (void *)0);
+    taskCreate(STACK_SIZE_512, ledsTask, 1, (void *)0);
+    taskCreate(STACK_SIZE_512, serialTask, 1, (void *)0);
+
+#endif
+
     Board_Init();
     SystemCoreClockUpdate();
     NVIC_SetPriority(PendSV_IRQn, PRIORITY_PENDSV);
 
-#ifdef EJ5
+#if defined(EJ5) || defined(FINAL_EX)
     uartConfig(UART_USB, 115200);
-    uartCallbackSet(UART_USB, UART_RECEIVE, usbRXCallback, NULL);
-    //    uartInterrupt(UART_USB, true);
+//    uartCallbackSet(UART_USB, UART_RECEIVE, usbRXCallback, NULL);
+//    uartInterrupt(UART_USB, true);
 #endif
 
     SysTick_Config(SystemCoreClock / 1000);
