@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['buffera',['bufferA',['../double__buffer_8c.html#a3b6a256837c0c6fb099964b50d6b6fbe',1,'double_buffer.c']]],
-  ['bufferb',['bufferB',['../double__buffer_8c.html#afb7e6839e37c55782d5802c4125fe667',1,'double_buffer.c']]]
+  ['action',['ACTION',['../main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05ae1bb1460cb779888412e634e983be161',1,'main.c']]],
+  ['applicationtask',['applicationTask',['../main_8c.html#a3b3a0d79d14621a34238a53074b9f355',1,'main.c']]]
 ];

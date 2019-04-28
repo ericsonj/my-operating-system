@@ -67,6 +67,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
@@ -89,21 +90,18 @@ $(function() {
 <code>#include &quot;<a class="el" href="double__buffer_8h_source.html">double_buffer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="queue_8h_source.html">queue.h</a>&quot;</code><br />
 <code>#include &quot;sapi_uart.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="debounce_8h_source.html">debounce.h</a>&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structledEvent__s.html">ledEvent_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aa02cd4f00b7c2f6ee665954e81df5f27"><td class="memItemLeft" align="right" valign="top"><a id="aa02cd4f00b7c2f6ee665954e81df5f27"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EJ0</b></td></tr>
-<tr class="separator:aa02cd4f00b7c2f6ee665954e81df5f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac748eb861d8b57a94995937f9f65ffba"><td class="memItemLeft" align="right" valign="top"><a id="ac748eb861d8b57a94995937f9f65ffba"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EJ1</b></td></tr>
-<tr class="separator:ac748eb861d8b57a94995937f9f65ffba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a988ae93dd7a3ad8f808b30a70843788b"><td class="memItemLeft" align="right" valign="top"><a id="a988ae93dd7a3ad8f808b30a70843788b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EJ3</b></td></tr>
-<tr class="separator:a988ae93dd7a3ad8f808b30a70843788b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88257fc053a5eefb4043395b20501c45"><td class="memItemLeft" align="right" valign="top"><a id="a88257fc053a5eefb4043395b20501c45"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EJ5</b></td></tr>
-<tr class="separator:a88257fc053a5eefb4043395b20501c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a472b8366b2f2f55d9fb3d3143f663f6d"><td class="memItemLeft" align="right" valign="top"><a id="a472b8366b2f2f55d9fb3d3143f663f6d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FINAL_EX</b></td></tr>
+<tr class="separator:a472b8366b2f2f55d9fb3d3143f663f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5a60ddaf00cb14dfcc85527d3768da3"><td class="memItemLeft" align="right" valign="top"><a id="ab5a60ddaf00cb14dfcc85527d3768da3"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>STACK_SIZE_1024</b>&#160;&#160;&#160;1024</td></tr>
 <tr class="separator:ab5a60ddaf00cb14dfcc85527d3768da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,6 +111,18 @@ Macros</h2></td></tr>
 <tr class="memitem:aae4c72f7772af6ac8396ca7ca1259af0"><td class="memItemLeft" align="right" valign="top"><a id="aae4c72f7772af6ac8396ca7ca1259af0"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>DOUBLE_BUFFER_SIZE</b>&#160;&#160;&#160;240</td></tr>
 <tr class="separator:aae4c72f7772af6ac8396ca7ca1259af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3378cada74dea34e3b772d7946e9978c"><td class="memItemLeft" align="right" valign="top"><a id="a3378cada74dea34e3b772d7946e9978c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERIAL_BUFF_SIZE</b>&#160;&#160;&#160;50</td></tr>
+<tr class="separator:a3378cada74dea34e3b772d7946e9978c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2e768915acc12b3787e1a767a18f24f"><td class="memItemLeft" align="right" valign="top"><a id="ae2e768915acc12b3787e1a767a18f24f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MSG_ALL_TIME</b>&#160;&#160;&#160;&quot;\tTiempo encendido: %ld ms\n\r&quot;</td></tr>
+<tr class="separator:ae2e768915acc12b3787e1a767a18f24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90caf7caac8f25139daa0f1623d765a9"><td class="memItemLeft" align="right" valign="top"><a id="a90caf7caac8f25139daa0f1623d765a9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MSG_FALLING_TIME</b>&#160;&#160;&#160;&quot;\tTiempo entre flancos descendentes: %ld ms\n\r&quot;</td></tr>
+<tr class="separator:a90caf7caac8f25139daa0f1623d765a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e8e5586ad2d54e2257d339f25d1b370"><td class="memItemLeft" align="right" valign="top"><a id="a1e8e5586ad2d54e2257d339f25d1b370"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MSG_RISING_TIME</b>&#160;&#160;&#160;&quot;\tTiempo entre flancos ascendentes: %ld ms\n\r&quot;</td></tr>
+<tr class="separator:a1e8e5586ad2d54e2257d339f25d1b370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -120,36 +130,33 @@ Enumerations</h2></td></tr>
 <b>DOWN</b>
  }</td></tr>
 <tr class="separator:aa46074d34fe2d6631c6bd9dc74633657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5b53f9e7e54a5983cc0d8788035897"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aab5b53f9e7e54a5983cc0d8788035897">b_seq</a> { <a class="el" href="main_8c.html#aab5b53f9e7e54a5983cc0d8788035897a350ea1b9477c6aacbe2d4261d3285efb">B_ERR</a> = -1, 
+<a class="el" href="main_8c.html#aab5b53f9e7e54a5983cc0d8788035897af2c481daad52abe759a8621ef6262f73">B1_INIT</a> = 0, 
+<a class="el" href="main_8c.html#aab5b53f9e7e54a5983cc0d8788035897ae4e86acc666504648aba1ba48dcea466">B2_INIT</a> = 1
+ }</td></tr>
+<tr class="separator:aab5b53f9e7e54a5983cc0d8788035897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9e60f4f29b1e1545eaab96e1de3f05"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05">tec_count_state</a> { <br />
+&#160;&#160;<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05af811bef354b292ff0713c50d7652c026">NOP</a>, 
+<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05a336bc51e8357473c964d4b01dba48cd7">WAIT_TEC2_DOWN</a>, 
+<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05a4698fb7b5643eec9d0aa729996abf081">WAIT_TEC2_UP</a>, 
+<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05a50614fcec23c4bb3097810ae310c37c0">WAIT_TEC1_DOWN</a>, 
+<br />
+&#160;&#160;<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05a5143462ff6eacf1b19c7573f6a7e2c18">WAIT_TEC1_UP</a>, 
+<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05ae1bb1460cb779888412e634e983be161">ACTION</a>, 
+<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05a2addb49878f50c95dc669e5fdbd130a2">COUNT</a>, 
+<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05a0f886785b600b91048fcdc434c6b4a8e">ERR</a>
+<br />
+ }</td></tr>
+<tr class="separator:a3e9e60f4f29b1e1545eaab96e1de3f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af78d18622a7c04097551b83be8a47c4a"><td class="memItemLeft" align="right" valign="top"><a id="af78d18622a7c04097551b83be8a47c4a"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>task1</b> (void *args)</td></tr>
-<tr class="separator:af78d18622a7c04097551b83be8a47c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a4db6a7b0028c238d0ee73a5ec39aa9"><td class="memItemLeft" align="right" valign="top"><a id="a9a4db6a7b0028c238d0ee73a5ec39aa9"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>task2</b> (void *args)</td></tr>
-<tr class="separator:a9a4db6a7b0028c238d0ee73a5ec39aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4787c99e160d10bbc4ded6d779ed9c64"><td class="memItemLeft" align="right" valign="top"><a id="a4787c99e160d10bbc4ded6d779ed9c64"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>task3</b> (void *args)</td></tr>
-<tr class="separator:a4787c99e160d10bbc4ded6d779ed9c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac45b46097bb9201006aa4f4fc86fcfdd"><td class="memItemLeft" align="right" valign="top"><a id="ac45b46097bb9201006aa4f4fc86fcfdd"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>buttonTask</b> (void *taskParm)</td></tr>
-<tr class="separator:ac45b46097bb9201006aa4f4fc86fcfdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a675ee8ea1588d5914c7c83fb8d37e7bd"><td class="memItemLeft" align="right" valign="top"><a id="a675ee8ea1588d5914c7c83fb8d37e7bd"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>ledTask2</b> (void *taskParmPtr)</td></tr>
-<tr class="separator:a675ee8ea1588d5914c7c83fb8d37e7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af30195fe841c7108d744bed47eec986d"><td class="memItemLeft" align="right" valign="top"><a id="af30195fe841c7108d744bed47eec986d"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>qButtonTask</b> (void *taskParamPtr)</td></tr>
-<tr class="separator:af30195fe841c7108d744bed47eec986d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7826c7e7824ca07d28b75ef3d3b0fa09"><td class="memItemLeft" align="right" valign="top"><a id="a7826c7e7824ca07d28b75ef3d3b0fa09"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>qLedTask</b> (void *taskParamPtr)</td></tr>
-<tr class="separator:a7826c7e7824ca07d28b75ef3d3b0fa09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66e125f777fa94fcb4e2b7247ee92d77"><td class="memItemLeft" align="right" valign="top"><a id="a66e125f777fa94fcb4e2b7247ee92d77"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>uartTxTask</b> (void *taskParamPtr)</td></tr>
-<tr class="separator:a66e125f777fa94fcb4e2b7247ee92d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98a7c39795474bbdf21fd6145ba4bcc0"><td class="memItemLeft" align="right" valign="top"><a id="a98a7c39795474bbdf21fd6145ba4bcc0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>usbRXCallback</b> (void *nSnR)</td></tr>
-<tr class="separator:a98a7c39795474bbdf21fd6145ba4bcc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b3a0d79d14621a34238a53074b9f355"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3b3a0d79d14621a34238a53074b9f355">applicationTask</a> (void *taskParamPtr)</td></tr>
+<tr class="separator:a3b3a0d79d14621a34238a53074b9f355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a568003d8ac5c39cbc46847b9d52043fc"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a568003d8ac5c39cbc46847b9d52043fc">ledsTask</a> (void *taskParamPtr)</td></tr>
+<tr class="separator:a568003d8ac5c39cbc46847b9d52043fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa185aeb1d5f08c79f4dad237b6f22d5b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aa185aeb1d5f08c79f4dad237b6f22d5b">serialTask</a> (void *taskParamPtr)</td></tr>
+<tr class="separator:aa185aeb1d5f08c79f4dad237b6f22d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top"><a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,18 +178,160 @@ int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>Buffer_Rest</b> [2
 <tr class="memitem:a5c0ebb15cb381d75d33b4d874fcc75bc"><td class="memItemLeft" align="right" valign="top"><a id="a5c0ebb15cb381d75d33b4d874fcc75bc"></a>
 <a class="el" href="structqueueHandler.html">queueHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><b>queue</b></td></tr>
 <tr class="separator:a5c0ebb15cb381d75d33b4d874fcc75bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42b9cb92cce4b2e9a1139d9e58a6c7c4"><td class="memItemLeft" align="right" valign="top"><a id="a42b9cb92cce4b2e9a1139d9e58a6c7c4"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>bufferOut</b> [50]</td></tr>
-<tr class="separator:a42b9cb92cce4b2e9a1139d9e58a6c7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa135375f4144259c7244fde3ddbba172"><td class="memItemLeft" align="right" valign="top"><a id="aa135375f4144259c7244fde3ddbba172"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>numFloat</b> [10]</td></tr>
-<tr class="separator:aa135375f4144259c7244fde3ddbba172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc5f831bd0e8879f6e76d1dc7469a16"><td class="memItemLeft" align="right" valign="top"><a id="a6cc5f831bd0e8879f6e76d1dc7469a16"></a>
+<a class="el" href="structqueueHandler.html">queueHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><b>serialQueue</b></td></tr>
+<tr class="separator:a6cc5f831bd0e8879f6e76d1dc7469a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15f433d807aaf83fa0951f3fd0f46743"><td class="memItemLeft" align="right" valign="top"><a id="a15f433d807aaf83fa0951f3fd0f46743"></a>
+<a class="el" href="structdebounce__t.html">debounce_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tec1Handler</b></td></tr>
+<tr class="separator:a15f433d807aaf83fa0951f3fd0f46743"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a455a3730a27ea8a379b90ceeeb286d25"><td class="memItemLeft" align="right" valign="top"><a id="a455a3730a27ea8a379b90ceeeb286d25"></a>
+<a class="el" href="structdebounce__t.html">debounce_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tec2Handler</b></td></tr>
+<tr class="separator:a455a3730a27ea8a379b90ceeeb286d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f242fe6ea5b84d0b69e6fcbb56cac6"><td class="memItemLeft" align="right" valign="top"><a id="ae3f242fe6ea5b84d0b69e6fcbb56cac6"></a>
+<a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05">tec_count_state</a>&#160;</td><td class="memItemRight" valign="bottom"><b>state</b></td></tr>
+<tr class="separator:ae3f242fe6ea5b84d0b69e6fcbb56cac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a151d284e3aa51c9a1acba421d8825026"><td class="memItemLeft" align="right" valign="top"><a id="a151d284e3aa51c9a1acba421d8825026"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>serialBufferOut</b> [SERIAL_BUFF_SIZE]</td></tr>
+<tr class="separator:a151d284e3aa51c9a1acba421d8825026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d0528c602e35f2daa68483f9675bc0"><td class="memItemLeft" align="right" valign="top"><a id="aa9d0528c602e35f2daa68483f9675bc0"></a>
+gpioMap_t&#160;</td><td class="memItemRight" valign="bottom"><b>led</b></td></tr>
+<tr class="separator:aa9d0528c602e35f2daa68483f9675bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main program body. </p>
 <dl class="section author"><dt>Author</dt><dd>Ericson Joseph </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>March 2019 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aab5b53f9e7e54a5983cc0d8788035897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab5b53f9e7e54a5983cc0d8788035897">&#9670;&nbsp;</a></span>b_seq</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="main_8c.html#aab5b53f9e7e54a5983cc0d8788035897">b_seq</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Buttons state sequence </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aab5b53f9e7e54a5983cc0d8788035897a350ea1b9477c6aacbe2d4261d3285efb"></a>B_ERR&#160;</td><td class="fielddoc"><p>B_ERR. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aab5b53f9e7e54a5983cc0d8788035897af2c481daad52abe759a8621ef6262f73"></a>B1_INIT&#160;</td><td class="fielddoc"><p>B1_INIT. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aab5b53f9e7e54a5983cc0d8788035897ae4e86acc666504648aba1ba48dcea466"></a>B2_INIT&#160;</td><td class="fielddoc"><p>B2_INIT. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a3e9e60f4f29b1e1545eaab96e1de3f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9e60f4f29b1e1545eaab96e1de3f05">&#9670;&nbsp;</a></span>tec_count_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="main_8c.html#a3e9e60f4f29b1e1545eaab96e1de3f05">tec_count_state</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Application States, final exam </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05af811bef354b292ff0713c50d7652c026"></a>NOP&#160;</td><td class="fielddoc"><p>NOP. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05a336bc51e8357473c964d4b01dba48cd7"></a>WAIT_TEC2_DOWN&#160;</td><td class="fielddoc"><p>WAIT_TEC2_DOWN. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05a4698fb7b5643eec9d0aa729996abf081"></a>WAIT_TEC2_UP&#160;</td><td class="fielddoc"><p>WAIT_TEC2_UP. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05a50614fcec23c4bb3097810ae310c37c0"></a>WAIT_TEC1_DOWN&#160;</td><td class="fielddoc"><p>WAIT_TEC1_DOWN. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05a5143462ff6eacf1b19c7573f6a7e2c18"></a>WAIT_TEC1_UP&#160;</td><td class="fielddoc"><p>WAIT_TEC1_UP. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05ae1bb1460cb779888412e634e983be161"></a>ACTION&#160;</td><td class="fielddoc"><p>ACTION. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05a2addb49878f50c95dc669e5fdbd130a2"></a>COUNT&#160;</td><td class="fielddoc"><p>COUNT. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3e9e60f4f29b1e1545eaab96e1de3f05a0f886785b600b91048fcdc434c6b4a8e"></a>ERR&#160;</td><td class="fielddoc"><p>ERR. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3b3a0d79d14621a34238a53074b9f355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b3a0d79d14621a34238a53074b9f355">&#9670;&nbsp;</a></span>applicationTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* applicationTask </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>taskParamPtr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Application main task </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taskParamPtr</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a568003d8ac5c39cbc46847b9d52043fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a568003d8ac5c39cbc46847b9d52043fc">&#9670;&nbsp;</a></span>ledsTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* ledsTask </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>taskParamPtr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Show leds task </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taskParamPtr</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa185aeb1d5f08c79f4dad237b6f22d5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa185aeb1d5f08c79f4dad237b6f22d5b">&#9670;&nbsp;</a></span>serialTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* serialTask </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>taskParamPtr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Serial show task </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taskParamPtr</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

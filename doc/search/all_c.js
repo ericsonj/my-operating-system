@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wait_5fstate',['wait_state',['../structtask__struct.html#a88b8b83ded1b2986d6a715405fdc3bdd',1,'task_struct']]]
+  ['priority',['priority',['../structtask__struct.html#a6b45cc6d1bc9102e06fe2e134fc7a126',1,'task_struct']]]
 ];

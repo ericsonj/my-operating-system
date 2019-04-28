@@ -7,6 +7,7 @@
 
 #include "static_memory.h"
 #include <string.h>
+#include "strings.h"
 
 static uint32_t mem32Size =
     NUM_BLOCK_32 * (BLOCK_SIZE_32 + sizeof(struct mem_block_s));

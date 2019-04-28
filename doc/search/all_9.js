@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['queue',['queue',['../structtask__struct.html#ae8ca55fcbf3fa871e3aaa27e3666686e',1,'task_struct']]],
-  ['queue_2ec',['queue.c',['../queue_8c.html',1,'']]],
-  ['queue_2eh',['queue.h',['../queue_8h.html',1,'']]],
-  ['queuecreate',['queueCreate',['../queue_8c.html#a20525eabac21f172c378b4af824744b2',1,'queueCreate(uint8_t size, uint16_t itemSize):&#160;queue.c'],['../queue_8h.html#a20525eabac21f172c378b4af824744b2',1,'queueCreate(uint8_t size, uint16_t itemSize):&#160;queue.c']]],
-  ['queuehandler',['queueHandler',['../structqueueHandler.html',1,'']]],
-  ['queuereceiveblocking',['queueReceiveBlocking',['../queue_8c.html#a1b0aaa69a002c4cf3298f0f74c697fce',1,'queueReceiveBlocking(queueHandler queue, void *item):&#160;queue.c'],['../queue_8h.html#a1b0aaa69a002c4cf3298f0f74c697fce',1,'queueReceiveBlocking(queueHandler queue, void *item):&#160;queue.c']]],
-  ['queuesend',['queueSend',['../queue_8c.html#a0565b151072a76d8ea31433cb345396e',1,'queueSend(queueHandler queue, void *item):&#160;queue.c'],['../queue_8h.html#a0565b151072a76d8ea31433cb345396e',1,'queueSend(queueHandler queue, void *item):&#160;queue.c']]]
+  ['myos_20documentation',['myOS Documentation',['../index.html',1,'']]],
+  ['main_2ec',['main.c',['../main_8c.html',1,'']]],
+  ['main_2eh',['main.h',['../main_8h.html',1,'']]],
+  ['mem_5fblock_5fs',['mem_block_s',['../structmem__block__s.html',1,'']]],
+  ['monitorreset',['monitorReset',['../myOS_8c.html#acbf3e388d87f6d691a5b04467126b4e4',1,'monitorReset():&#160;myOS.c'],['../myOS__monitor_8h.html#acbf3e388d87f6d691a5b04467126b4e4',1,'monitorReset():&#160;myOS.c']]],
+  ['myos_2ec',['myOS.c',['../myOS_8c.html',1,'']]],
+  ['myos_2eh',['myOS.h',['../myOS_8h.html',1,'']]],
+  ['myos_5fmonitor_2eh',['myOS_monitor.h',['../myOS__monitor_8h.html',1,'']]]
 ];

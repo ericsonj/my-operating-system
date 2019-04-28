@@ -1,0 +1,32 @@
+diff --git a/etc/target/lpc4337_m4.mk b/etc/target/lpc4337_m4.mk
+index 423f433..e5ce590 100644
+--- a/etc/target/lpc4337_m4.mk
++++ b/etc/target/lpc4337_m4.mk
+@@ -56,7 +56,7 @@ CFLAGS  := -Wall -ggdb3 -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 \
+            -mfloat-abi=softfp -fdata-sections -ffunction-sections
+ 
+ # Linking flags
+-LFLAGS  := -nostdlib -fno-builtin -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 \
++LFLAGS  := -fno-builtin -mcpu=cortex-m4 -specs=nosys.specs -mthumb -mfpu=fpv4-sp-d16 \
+            -mfloat-abi=softfp -Xlinker -Map=$(OUT_PATH)/$(PROJECT_NAME).map \
+ 			  -Wl,--gc-sections
+ 
+diff --git a/modules/lpc4337_m4/sapi/src/sapi_tick.c b/modules/lpc4337_m4/sapi/src/sapi_tick.c
+index 76a1fb6..16e5563 100755
+--- a/modules/lpc4337_m4/sapi/src/sapi_tick.c
++++ b/modules/lpc4337_m4/sapi/src/sapi_tick.c
+@@ -145,6 +145,7 @@ void tickPowerSet( bool_t power ){
+ //__attribute__ ((section(".after_vectors")))
+ 
+ // SysTick Timer ISR Handler
++/* TODO: Comentado para ejercicio de myOS
+ void SysTick_Handler(void) {
+ 
+    tickCounter++;
+@@ -155,5 +156,6 @@ void SysTick_Handler(void) {
+    }
+ 
+ }
++*/
+ 
+ /*==================[end of file]============================================*/

@@ -1,3 +1,11 @@
+/**
+ * @file   debounce.h
+ * @author Ericson Joseph
+ * @date   Apr 1, 2019
+ *
+ * @brief Debounce
+ */
+
 /*
  * debounce.h
  *
@@ -15,15 +23,18 @@ extern "C" {
 #include "sapi.h"
 
 typedef enum {
-	BUTTON_UP, BUTTON_FALLING, BUTTON_DOWN, BUTTON_RASING
+    BUTTON_UP,
+    BUTTON_FALLING,
+    BUTTON_DOWN,
+    BUTTON_RASING
 } buttonState_t;
 
 typedef struct {
-	buttonState_t state;
-	uint32_t touchs;
+    buttonState_t state;
+    uint32_t touchs;
 } debounce_t;
 
-void debounceMEF(gpioMap_t pin, debounce_t* debonce);
+void debounceMEF(gpioMap_t pin, debounce_t *debonce);
 
 #ifdef __cplusplus
 }

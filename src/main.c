@@ -43,7 +43,6 @@ typedef enum { UP, DOWN } ButtonState;
 //#define EJ2
 //#define EJ3
 //#define EJ5
-
 #define FINAL_EX
 
 #define STACK_SIZE_1024 1024
@@ -51,9 +50,9 @@ typedef enum { UP, DOWN } ButtonState;
 #define DOUBLE_BUFFER_SIZE 240
 
 #define SERIAL_BUFF_SIZE 50
-#define MSG_ALL_TIME "Tiempo encendido: %ld ms\n\r"
-#define MSG_FALLING_TIME "Tiempo entre flancos descendentes: %ld ms\n\r"
-#define MSG_RISING_TIME "Tiempo entre flancos ascendentes: %ld ms\n\r"
+#define MSG_ALL_TIME "\tTiempo encendido: %ld ms\n\r"
+#define MSG_FALLING_TIME "\tTiempo entre flancos descendentes: %ld ms\n\r"
+#define MSG_RISING_TIME "\tTiempo entre flancos ascendentes: %ld ms\n\r"
 
 /* Private variables ------------------------------- */
 
@@ -68,25 +67,40 @@ queueHandler serialQueue;
 debounce_t tec1Handler;
 debounce_t tec2Handler;
 
+/**
+ * Buttons state sequence
+ */
 typedef enum {
-    NOP,
-    WAIT_TEC2_DOWN,
-    WAIT_TEC2_UP,
-    WAIT_TEC1_DOWN,
-    WAIT_TEC1_UP,
-    ACTION,
-    COUNT
+    B_ERR   = -1, //!< B_ERR
+    B1_INIT = 0,  //!< B1_INIT
+    B2_INIT = 1   //!< B2_INIT
+} b_seq;
+
+/**
+ * Application States, final exam
+ */
+typedef enum {
+    NOP,            //!< NOP
+    WAIT_TEC2_DOWN, //!< WAIT_TEC2_DOWN
+    WAIT_TEC2_UP,   //!< WAIT_TEC2_UP
+    WAIT_TEC1_DOWN, //!< WAIT_TEC1_DOWN
+    WAIT_TEC1_UP,   //!< WAIT_TEC1_UP
+    ACTION,         //!< ACTION
+    COUNT,          //!< COUNT
+    ERR,            //!< ERR
 } tec_count_state;
 
+/**
+ * Led event structure
+ */
 typedef struct {
-    uint8_t type;
+    int8_t type;
     uint32_t fallingTime;
     uint32_t risingTime;
     gpioMap_t led;
 } ledEvent_s;
 
 tec_count_state state;
-
 char serialBufferOut[SERIAL_BUFF_SIZE];
 
 gpioMap_t led;
@@ -192,125 +206,6 @@ void *multBuffer(void *taskParamPtr) {
 }
 #endif
 
-#ifdef FINAL_EX
-
-void *applicationTask(void *taskParamPtr) {
-
-    uint32_t startTime = 0;
-    uint32_t endTime   = 0;
-    ledEvent_s ledEvent;
-    while (true) {
-        debounceMEF(TEC1, &tec1Handler);
-        debounceMEF(TEC2, &tec2Handler);
-        switch (state) {
-        case NOP:
-            if (tec1Handler.state == BUTTON_DOWN) {
-                state         = WAIT_TEC2_DOWN;
-                ledEvent.type = 0;
-                startTime     = getTickCount();
-            } else if (tec2Handler.state == BUTTON_DOWN) {
-                state         = WAIT_TEC1_DOWN;
-                ledEvent.type = 1;
-                startTime     = getTickCount();
-            }
-            break;
-        case WAIT_TEC2_DOWN:
-            if (tec2Handler.state == BUTTON_DOWN) {
-                state     = COUNT;
-                startTime = getTickCount() - startTime;
-            } else if (tec1Handler.state == BUTTON_UP) {
-                state     = NOP;
-                startTime = 0;
-            }
-            break;
-        case WAIT_TEC2_UP:
-            if (tec2Handler.state == BUTTON_UP) {
-                endTime = getTickCount() - endTime;
-                state   = ACTION;
-            }
-            break;
-        case WAIT_TEC1_UP:
-            if (tec1Handler.state == BUTTON_UP) {
-                endTime = getTickCount() - endTime;
-                state   = ACTION;
-            }
-            break;
-        case WAIT_TEC1_DOWN:
-            if (tec1Handler.state == BUTTON_DOWN) {
-                state     = COUNT;
-                startTime = getTickCount() - startTime;
-            } else if (tec2Handler.state == BUTTON_UP) {
-                state     = NOP;
-                startTime = 0;
-            }
-            break;
-        case COUNT:
-            if (tec1Handler.state == BUTTON_UP) {
-                endTime      = getTickCount();
-                ledEvent.led = ledEvent.type == 0 ? LEDG : LED2;
-                state        = WAIT_TEC2_UP;
-            } else if (tec2Handler.state == BUTTON_UP) {
-                endTime      = getTickCount();
-                ledEvent.led = ledEvent.type == 0 ? LEDR : LEDB;
-                state        = WAIT_TEC1_UP;
-            }
-            break;
-        case ACTION:
-            ledEvent.fallingTime = startTime;
-            ledEvent.risingTime  = endTime;
-            queueSend(queue, &ledEvent);
-            queueSend(serialQueue, &ledEvent);
-            state = NOP;
-            break;
-        default: break;
-        }
-        taskDelay(20);
-    }
-}
-
-void *ledsTask(void *taskParamPtr) {
-    while (TRUE) {
-        ledEvent_s ledEvent;
-        queueReceiveBlocking(queue, &ledEvent);
-        led = ledEvent.led;
-        gpioWrite(led, ON);
-        taskDelay(ledEvent.fallingTime + ledEvent.risingTime);
-        gpioWrite(led, OFF);
-        taskDelay(10); // PARA MOSTRAR SI SE ENCOLAN VIAS PULSACIONES
-    }
-}
-
-void *serialTask(void *taskParamPtr) {
-    while (TRUE) {
-        ledEvent_s ledEvent;
-        queueReceiveBlocking(serialQueue, &ledEvent);
-        switch (ledEvent.led) {
-        case LEDG: uartWriteString(UART_USB, "Led Verde encendido:\n\r"); break;
-        case LEDR: uartWriteString(UART_USB, "Led Rojo encendido:\n\r"); break;
-        case LEDB: uartWriteString(UART_USB, "Led Azul encendido:\n\r"); break;
-        case LED2:
-            uartWriteString(UART_USB, "Led Amarillo encendido:\n\r");
-            break;
-        default: break;
-        }
-
-        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
-        sprintf(serialBufferOut, MSG_ALL_TIME,
-                ledEvent.fallingTime + ledEvent.risingTime);
-        uartWriteString(UART_USB, serialBufferOut);
-
-        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
-        sprintf(serialBufferOut, MSG_FALLING_TIME, ledEvent.fallingTime);
-        uartWriteString(UART_USB, serialBufferOut);
-
-        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
-        sprintf(serialBufferOut, MSG_RISING_TIME, ledEvent.risingTime);
-        uartWriteString(UART_USB, serialBufferOut);
-    }
-}
-
-#endif
-
 #ifdef EJ3
 
 void *qButtonTask(void *taskParamPtr) {
@@ -381,6 +276,170 @@ void usbRXCallback(void *nSnR) {
 
 #endif
 
+#ifdef FINAL_EX
+
+/**
+ * Application main task
+ * @param taskParamPtr
+ */
+void *applicationTask(void *taskParamPtr) {
+
+    uint32_t startTime = 0;
+    uint32_t endTime   = 0;
+    ledEvent_s ledEvent;
+    while (true) {
+        debounceMEF(TEC1, &tec1Handler);
+        debounceMEF(TEC2, &tec2Handler);
+        switch (state) {
+        case NOP:
+            if (tec1Handler.state == BUTTON_DOWN) {
+                state         = WAIT_TEC2_DOWN;
+                ledEvent.type = B1_INIT;
+                startTime     = getTickCount();
+            } else if (tec2Handler.state == BUTTON_DOWN) {
+                state         = WAIT_TEC1_DOWN;
+                ledEvent.type = B2_INIT;
+                startTime     = getTickCount();
+            }
+            break;
+        case WAIT_TEC2_DOWN:
+            if (tec2Handler.state == BUTTON_DOWN) {
+                state     = COUNT;
+                startTime = getTickCount() - startTime;
+            } else if (tec1Handler.state == BUTTON_UP) {
+                state         = ERR;
+                ledEvent.type = B_ERR;
+                startTime     = 0;
+                queueSend(serialQueue, &ledEvent);
+            }
+            break;
+        case WAIT_TEC2_UP:
+            if (tec2Handler.state == BUTTON_UP) {
+                endTime = getTickCount() - endTime;
+                state   = ACTION;
+            } else if (tec1Handler.state == BUTTON_DOWN) {
+                state         = ERR;
+                ledEvent.type = B_ERR;
+                startTime     = 0;
+                queueSend(serialQueue, &ledEvent);
+            }
+            break;
+        case WAIT_TEC1_UP:
+            if (tec1Handler.state == BUTTON_UP) {
+                endTime = getTickCount() - endTime;
+                state   = ACTION;
+            } else if (tec2Handler.state == BUTTON_DOWN) {
+                state         = ERR;
+                ledEvent.type = B_ERR;
+                startTime     = 0;
+                queueSend(serialQueue, &ledEvent);
+            }
+            break;
+        case WAIT_TEC1_DOWN:
+            if (tec1Handler.state == BUTTON_DOWN) {
+                state     = COUNT;
+                startTime = getTickCount() - startTime;
+            } else if (tec2Handler.state == BUTTON_UP) {
+                state         = ERR;
+                ledEvent.type = B_ERR;
+                startTime     = 0;
+                queueSend(serialQueue, &ledEvent);
+            }
+            break;
+        case COUNT:
+            if (tec1Handler.state == BUTTON_UP) {
+                endTime      = getTickCount();
+                ledEvent.led = ledEvent.type == B1_INIT ? LEDG : LED2;
+                state        = WAIT_TEC2_UP;
+            } else if (tec2Handler.state == BUTTON_UP) {
+                endTime      = getTickCount();
+                ledEvent.led = ledEvent.type == B1_INIT ? LED1 : LEDB;
+                state        = WAIT_TEC1_UP;
+            }
+            break;
+        case ACTION:
+            ledEvent.fallingTime = startTime;
+            ledEvent.risingTime  = endTime;
+            queueSend(queue, &ledEvent);
+            queueSend(serialQueue, &ledEvent);
+            state = NOP;
+            break;
+        case ERR:
+            /*
+             * Se espera que al entrar al estado de error
+             * los botones sean liberados para volver al estado
+             * inicial NOP.
+             */
+            if (tec1Handler.state == BUTTON_UP ||
+                tec2Handler.state == BUTTON_UP) {
+                ledEvent.fallingTime = 0;
+                ledEvent.risingTime  = 0;
+                state                = NOP;
+            }
+            break;
+        default: break;
+        }
+        taskDelay(20);
+    }
+}
+
+/**
+ * Show leds task
+ * @param taskParamPtr
+ */
+void *ledsTask(void *taskParamPtr) {
+    while (TRUE) {
+        ledEvent_s ledEvent;
+        queueReceiveBlocking(queue, &ledEvent);
+        led = ledEvent.led;
+        gpioWrite(led, ON);
+        taskDelay(ledEvent.fallingTime + ledEvent.risingTime);
+        gpioWrite(led, OFF);
+        taskDelay(10); // PARA MOSTRAR SI SE ENCOLAN VIAS PULSACIONES
+    }
+}
+
+/**
+ * Serial show task
+ * @param taskParamPtr
+ */
+void *serialTask(void *taskParamPtr) {
+    while (TRUE) {
+        ledEvent_s ledEvent;
+        queueReceiveBlocking(serialQueue, &ledEvent);
+
+        if (ledEvent.type == -1) {
+            uartWriteString(UART_USB, "ERROR\n\r");
+            continue;
+        }
+
+        switch (ledEvent.led) {
+        case LEDG: uartWriteString(UART_USB, "Led Verde encendido:\n\r"); break;
+        case LED1: uartWriteString(UART_USB, "Led Rojo encendido:\n\r"); break;
+        case LEDB: uartWriteString(UART_USB, "Led Azul encendido:\n\r"); break;
+        case LED2:
+            uartWriteString(UART_USB, "Led Amarillo encendido:\n\r");
+            break;
+        default: break;
+        }
+
+        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
+        sprintf(serialBufferOut, MSG_ALL_TIME,
+                ledEvent.fallingTime + ledEvent.risingTime);
+        uartWriteString(UART_USB, serialBufferOut);
+
+        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
+        sprintf(serialBufferOut, MSG_FALLING_TIME, ledEvent.fallingTime);
+        uartWriteString(UART_USB, serialBufferOut);
+
+        bzero(serialBufferOut, SERIAL_BUFF_SIZE);
+        sprintf(serialBufferOut, MSG_RISING_TIME, ledEvent.risingTime);
+        uartWriteString(UART_USB, serialBufferOut);
+    }
+}
+
+#endif
+
 /* Code -------------------------------------------- */
 
 int main() {
@@ -418,10 +477,9 @@ int main() {
 #ifdef FINAL_EX
     queue       = queueCreate(10, sizeof(ledEvent_s));
     serialQueue = queueCreate(10, sizeof(ledEvent_s));
-    taskCreate(STACK_SIZE_512, applicationTask, 2, (void *)0);
+    taskCreate(STACK_SIZE_1024, applicationTask, 2, (void *)0);
     taskCreate(STACK_SIZE_512, ledsTask, 1, (void *)0);
-    taskCreate(STACK_SIZE_512, serialTask, 1, (void *)0);
-
+    taskCreate(STACK_SIZE_1024, serialTask, 1, (void *)0);
 #endif
 
     Board_Init();

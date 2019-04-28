@@ -12,6 +12,7 @@
 #include "task_queue.h"
 #include "static_memory.h"
 #include "semphr.h"
+#include "strings.h"
 
 static uint32_t tickCount = 0;
 
